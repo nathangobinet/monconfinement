@@ -7,6 +7,7 @@ import useCachedResources from './hooks/useCachedResources';
 import HomeScreen from './screens/HomeScreen';
 import LinksScreen from './screens/LinksScreen';
 import Colors from './constants/Colors';
+import HeaderOptions from './constants/HeaderOptions'
 
 const Stack = createStackNavigator();
 
@@ -24,11 +25,7 @@ export default function App() {
             <Stack.Screen 
               name="Sorties" 
               component={HomeScreen}
-              options={{
-                headerTitleAlign: 'center',
-                headerTintColor: 'white',
-                headerStyle: { backgroundColor: '#DF7861' },
-              }}
+              options={ HeaderOptions }
             />
             <Stack.Screen name="Paramètres" component={LinksScreen} />
           </Stack.Navigator>
