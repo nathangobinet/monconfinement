@@ -1,13 +1,18 @@
 import * as React from 'react';
-import { Button, Platform, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+
+import ParameterButton from '../components/ParameterButton';
 
 export default function HomeScreen({ navigation }) {
+
+  navigation.setOptions({
+    headerRight: () => (
+      <ParameterButton navigation={navigation} />
+    )});
+
   return (
     <View style={styles.container}>
-      <Button 
-      title="Paramètres"
-      onPress={() => navigation.navigate('Paramètres')}
-      /> 
+      
     </View>
   );
 }
