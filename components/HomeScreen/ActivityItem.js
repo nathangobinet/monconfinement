@@ -6,10 +6,10 @@ import Colors from '../../constants/Colors'
 export default function ActivityItem() {
     return(
         <View style={styles.container}>
-			<View>
+			<View style={styles.img}>
 			</View>
 			<View>
-				<Text>Activité Physique</Text>
+				<Text style={styles.title}>Activité Physique</Text>
 				<Text>Toutes les pratiques liées....</Text>
 			</View>
 		</View>
@@ -19,8 +19,21 @@ export default function ActivityItem() {
 const styles = StyleSheet.create({
 	container: {
 		margin: 20,
-		width: 332,
-		height: 92,
-		backgroundColor: '#fff'
+		width: 330,
+		height: 90,
+		borderRadius: 5,
+		backgroundColor: '#fff',
+		flexDirection: 'row'
+	},
+
+	img: {
+		backgroundColor: '#FF0000',
+		height: 90,
+		width: 90,
+		marginRight: 10
+	},
+
+	title : {
+		fontSize: 20
 	}
 })
