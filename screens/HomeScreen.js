@@ -15,14 +15,15 @@ export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <ActivityItem/>
-	  <ActivityItem/>
-	  <ActivityItem/>
+	    <ActivityItem/>
+	    <ActivityItem/>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 10,
     flex: 1,
     backgroundColor: Colors.background
   },
