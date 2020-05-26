@@ -25,11 +25,11 @@ export default function App() {
             <Stack.Screen 
               name="Sorties" 
               component={HomeScreen}
-              options={({ navigation }) => ({
+              options={{
                 headerTitleAlign: 'center',
                 headerTintColor: 'white',
                 headerStyle: { backgroundColor: '#DF7861' },
-              })}
+              }}
             />
             <Stack.Screen name="Paramètres" component={LinksScreen} />
           </Stack.Navigator>
