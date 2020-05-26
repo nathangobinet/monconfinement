@@ -2,6 +2,8 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import ParameterButton from '../components/ParameterButton';
+import ActivityItem from '../components/HomeScreen/ActivityItem'
+import Colors from '../constants/Colors';
 
 export default function HomeScreen({ navigation }) {
 
@@ -12,7 +14,7 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      
+      <ActivityItem/>
     </View>
   );
 }
@@ -20,6 +22,6 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.background
   },
 });
