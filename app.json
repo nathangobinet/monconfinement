@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "MonConfinement",
-    "slug": "MonConfinement",
+    "name": "Mon Confinement",
+    "slug": "mon-confinement",
     "platforms": [
       "ios",
       "android",
@@ -9,12 +9,12 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
     "scheme": "myapp",
+    "backgroundColor": "#FCF8F3",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/icon-splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#DF7861"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -23,10 +23,22 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "icon": "./assets/images/icon.png"
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
+    }, 
+    "android": {
+      "icon": "./assets/images/icon.png",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/icon-white.png",
+        "backgroundColor": "#DF7861"
+      }
+    }, 
+    "androidStatusBar": {
+      "barStyle": "light-content",
+      "backgroundColor": "#986357"
     }
   }
 }

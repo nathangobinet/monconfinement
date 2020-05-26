@@ -27,7 +27,11 @@ export default function App() {
               component={HomeScreen}
               options={ HeaderOptions }
             />
-            <Stack.Screen name="Paramètres" component={LinksScreen} />
+            <Stack.Screen 
+              name="Paramètres" 
+              component={LinksScreen} 
+              options={ HeaderOptions } 
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </View>
