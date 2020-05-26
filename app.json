@@ -11,6 +11,7 @@
     "orientation": "portrait",
     "scheme": "myapp",
     "backgroundColor": "#FCF8F3",
+    "icon": "./assets/images/icon.png",
     "splash": {
       "image": "./assets/images/icon-splash.png",
       "resizeMode": "contain",
