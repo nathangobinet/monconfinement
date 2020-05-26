@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
 		height: 150,
 		borderRadius: 5,
 
-		backgroundColor: '#fff',
+		backgroundColor: Colors.white,
 
 		flexDirection: 'row',
 
@@ -45,8 +45,6 @@ const styles = StyleSheet.create({
 
 	imgContainer: {
 		backgroundColor: Colors.secondary,
-		width:120,
-		height:150,
 
 		borderTopLeftRadius: 5,
     	borderBottomLeftRadius: 5,
@@ -65,9 +63,7 @@ const styles = StyleSheet.create({
 
 	textContainer: {
 		flex: 2,
-		paddingTop: 10,
-		marginLeft: 10,
-		marginRight: 10,
+		padding: 10,
 	},
 
 	title : {
