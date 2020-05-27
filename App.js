@@ -8,6 +8,7 @@ import HomeScreen from './screens/HomeScreen';
 import LinksScreen from './screens/LinksScreen';
 import Colors from './constants/Colors';
 import HeaderOptions from './constants/HeaderOptions'
+import ActivityScreen from './screens/ActivityScreen';
 
 const Stack = createStackNavigator();
 
@@ -30,6 +31,11 @@ export default function App() {
             <Stack.Screen 
               name="Paramètres" 
               component={LinksScreen} 
+              options={ HeaderOptions } 
+            />
+            <Stack.Screen 
+              name="Activité" 
+              component={ActivityScreen} 
               options={ HeaderOptions } 
             />
           </Stack.Navigator>
