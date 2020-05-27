@@ -4,7 +4,8 @@ import { StyleSheet, View } from 'react-native';
 import ParameterButton from '../components/ParameterButton';
 import ActivityItem from '../components/HomeScreen/ActivityItem'
 import Colors from '../constants/Colors';
-import ActivityImages from '../constants/ActivityImages';
+
+import ListeActivite from '../constants/listeActivite';
 
 export default function HomeScreen({ navigation }) {
   navigation.setOptions({
@@ -14,9 +15,9 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <ActivityItem titre="Activité Physique" img={ActivityImages['Activité physique']}/>
-	    <ActivityItem titre="Courses / Ravitaillement" img={ActivityImages['Course']}/>
-	    <ActivityItem titre="Autres" img={ActivityImages['Autre']}/>
+      {
+        ListeActivite.map((activity) => <ActivityItem titre={activity.titre} img={activity.img} desc={activity.desc}/>)
+      }
     </View>
   );
 }

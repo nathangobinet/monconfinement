@@ -17,7 +17,7 @@ export default function ActivityItem(props) {
 					<View style={styles.textContainer}>
 						<Text style={styles.title}>{props.titre}</Text>
 						<View style={styles.orangeLine}></View>
-						<Text style={styles.description}>Petite description vraiment pas mal.... Je profite de voir si ça fonctionne et si ça va bien à la ligne</Text>
+						<Text style={styles.description}>{props.desc}</Text>
 					</View>
 			</View>
 		</TouchableOpacity>
