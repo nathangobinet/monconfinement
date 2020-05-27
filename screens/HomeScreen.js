@@ -14,29 +14,11 @@ import ListeActivite from '../constants/listeActivite';
 export default function HomeScreen({ navigation }) {
 
   /* Location tests */
-  const [location, setLocation] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
+  const [text, setText] = useState('Waiting..');
 
-  useEffect(() => {
-    (async () => {
-      let { status } = await Location.requestPermissionsAsync();
-      if (status !== 'granted') {
-        setErrorMsg('Permission to access location was denied');
-      }
-
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
-    })();
-  });
-
-  let text = 'Waiting..';
-  if (errorMsg) {
-    text = errorMsg;
-  } else if (location) {
-    text = JSON.stringify(location);
-  }
-
-
+  useEffect(() => { 
+    getPosition().then((text) => {setText(text);})
+  }, [])
   /* Location tests */
 
 
@@ -65,6 +47,13 @@ export default function HomeScreen({ navigation }) {
       <Text>{text}</Text>
     </View>
   );
+}
+
+async function getPosition() {
+  let { status } = await Location.requestPermissionsAsync();
+  if (status !== 'granted') return('Permission to access location was denied');
+  const location = await Location.getCurrentPositionAsync();
+  return JSON.stringify(location);
 }
 
 const styles = StyleSheet.create({
