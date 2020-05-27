@@ -7,6 +7,8 @@ import Colors from '../constants/Colors';
 
 export default function HomeScreen({ navigation }) {
 
+  const path ='../assets/images/ActivityPic/'
+
   navigation.setOptions({
     headerRight: () => (
       <ParameterButton navigation={navigation} />
@@ -14,9 +16,9 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <ActivityItem titre="Activité Physique" img="activitePhysique.jpg"/>
-	    <ActivityItem titre="Courses / Ravitaillement" img="coursesRavitaillement.jpg"/>
-	    <ActivityItem titre="Autres" img="other.jpg"/>
+      <ActivityItem titre="Activité Physique" img={require(path + 'coursesRavitaillement.jpg')}/>
+	    <ActivityItem titre="Courses / Ravitaillement" img={require(path + 'activitePhysique.jpg')}/>
+	    <ActivityItem titre="Autres" img={require(path + 'other.jpg')}/>
     </View>
   );
 }

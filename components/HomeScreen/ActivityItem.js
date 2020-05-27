@@ -9,7 +9,7 @@ export default function ActivityItem(props) {
 				<View style={styles.imgContainer}>
 				<Image
 					style={styles.img}
-					source={require('../../assets/images/ActivityPic/'+props.img)}
+					source={props.img}
 				/>
 				</View>
 				<View style={styles.textContainer}>
