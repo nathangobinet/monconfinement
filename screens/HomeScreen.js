@@ -4,11 +4,9 @@ import { StyleSheet, View } from 'react-native';
 import ParameterButton from '../components/ParameterButton';
 import ActivityItem from '../components/HomeScreen/ActivityItem'
 import Colors from '../constants/Colors';
+import ActivityImages from '../constants/ActivityImages';
 
 export default function HomeScreen({ navigation }) {
-
-  const path ='../assets/images/ActivityPic/'
-
   navigation.setOptions({
     headerRight: () => (
       <ParameterButton navigation={navigation} />
@@ -16,9 +14,9 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <ActivityItem titre="Activité Physique" img={require(path + 'coursesRavitaillement.jpg')}/>
-	    <ActivityItem titre="Courses / Ravitaillement" img={require(path + 'activitePhysique.jpg')}/>
-	    <ActivityItem titre="Autres" img={require(path + 'other.jpg')}/>
+      <ActivityItem titre="Activité Physique" img={ActivityImages['Activité physique']}/>
+	    <ActivityItem titre="Courses / Ravitaillement" img={ActivityImages['Course']}/>
+	    <ActivityItem titre="Autres" img={ActivityImages['Autre']}/>
     </View>
   );
 }
