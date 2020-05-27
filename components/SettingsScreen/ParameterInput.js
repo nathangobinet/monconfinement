@@ -10,7 +10,8 @@ export default function ParameterInput(props) {
 			<View style={styles.container}>
 				<View style={styles.inputContainer}>
 					<Text style={styles.title}>{props.titre}</Text>
-					<TextInput style={styles.input} placeholder="Nom"/>
+                    <Text style={styles.label}>Nom</Text>
+					<TextInput style={styles.input} placeholder="Placeholder">Valeur</TextInput>
 				</View>
 			</View>
 		</TouchableOpacity>
@@ -40,6 +41,12 @@ const styles = StyleSheet.create({
         borderColor: '#CCC',
         
         textAlign: "right",
-        color: Colors.primary
+        color: Colors.primary,
+    },
+
+    label: {
+        zIndex: 1,
+        marginLeft: 10,
+        marginBottom: -30
     }
 })
