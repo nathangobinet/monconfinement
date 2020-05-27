@@ -1,23 +1,26 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Text, Image } from 'react-native';
 import Colors from '../../constants/Colors'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 export default function ActivityItem(props) {
     return(
-        <View style={styles.container}>
-				<View style={styles.imgContainer}>
-				<Image
-					style={styles.img}
-					source={props.img}
-				/>
-				</View>
-				<View style={styles.textContainer}>
-					<Text style={styles.title}>{props.titre}</Text>
-					<View style={styles.orangeLine}></View>
-					<Text style={styles.description}>Petite description vraiment pas mal.... Je profite de voir si ça fonctionne et si ça va bien à la ligne</Text>
-				</View>
-		</View>
+		<TouchableOpacity activeOpacity={.8}>
+			<View style={styles.container}>
+					<View style={styles.imgContainer}>
+					<Image
+						style={styles.img}
+						source={props.img}
+					/>
+					</View>
+					<View style={styles.textContainer}>
+						<Text style={styles.title}>{props.titre}</Text>
+						<View style={styles.orangeLine}></View>
+						<Text style={styles.description}>Petite description vraiment pas mal.... Je profite de voir si ça fonctionne et si ça va bien à la ligne</Text>
+					</View>
+			</View>
+		</TouchableOpacity>
     )
 }
 
