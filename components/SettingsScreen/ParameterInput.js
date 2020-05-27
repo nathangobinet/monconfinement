@@ -6,47 +6,34 @@ import { TouchableOpacity, TextInput } from 'react-native-gesture-handler';
 
 export default function ParameterInput(props) {
     return(
-		<TouchableOpacity activeOpacity={.8} >
-			<View style={styles.container}>
-				<View style={styles.inputContainer}>
-					<Text style={styles.title}>{props.titre}</Text>
-                    <Text style={styles.label}>Nom</Text>
-					<TextInput style={styles.input} placeholder="Placeholder">Valeur</TextInput>
-				</View>
-			</View>
-		</TouchableOpacity>
+            <View style={styles.inputContainer}>
+                <Text style={styles.label}>Nom</Text>
+                <TextInput style={styles.input} placeholder="Nom"></TextInput>
+            </View>
     )
 }
 
 const styles = StyleSheet.create({
-	container: {
-		margin: 10,
-		width: '95%',
-		
-
-        flex: 1
-    },
-    
-    input: {
-        backgroundColor: '#AAA',
-        flex: 1,
-        padding: 15,
-        height: 80,
+	inputContainer: {
+        padding: 10,
+        marginBottom: 10,
+        display:"flex",
+        flexDirection: "row",
 
         backgroundColor: Colors.white,
 		borderRadius: 5,
 
-
         borderWidth: 1,
         borderColor: '#CCC',
-        
+    },
+    
+    input: {
+        flex: 2,
         textAlign: "right",
         color: Colors.primary,
     },
 
     label: {
-        zIndex: 1,
-        marginLeft: 10,
-        marginBottom: -30
+        flex: 1,
     }
 })

@@ -19,14 +19,16 @@ export default function SettingsScreen() {
 
 const styles = StyleSheet.create({
     container: {
-      paddingTop: 10,
+      padding: 10,
       backgroundColor: Colors.background,
       flexDirection: 'column'
     },
 
     categorie: {
         fontWeight: "700",
-        color: Colors.text
+        color: Colors.text,
+        marginBottom: 15,
+        marginTop: 10,
     }
 });
   
