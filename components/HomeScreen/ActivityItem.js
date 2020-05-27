@@ -6,7 +6,16 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function ActivityItem(props) {
     return(
-		<TouchableOpacity activeOpacity={.8}>
+		<TouchableOpacity 
+			activeOpacity={.8}
+			onPress={() => props.navigation.navigate("Activité", {
+				titre: props.titre,
+				img: props.img,
+				desc: props.desc,
+				type: props.type,
+			})}
+			>
+			
 			<View style={styles.container}>
 					<View style={styles.imgContainer}>
 					<Image

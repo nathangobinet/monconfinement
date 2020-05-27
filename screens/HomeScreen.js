@@ -16,7 +16,19 @@ export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       {
-        ListeActivite.map((activity) => <ActivityItem titre={activity.titre} img={activity.img} desc={activity.desc}/>)
+        ListeActivite.map(
+          (activity, key) => {
+            return (
+              <ActivityItem 
+                navigation={navigation} 
+                titre={activity.titre} 
+                img={activity.img} 
+                desc={activity.desc} 
+                type={activity.type}
+                key={key}
+              />
+            );
+        })
       }
     </View>
   );

@@ -1,12 +1,15 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text,  View } from 'react-native';
 
 import Colors from '../constants/Colors'
 import ParameterButton from '../components/ParameterButton';
 
-export default function ActivityScreen({ navigation }) {
+export default function ActivityScreen({ route, navigation}) {
+
+  const { titre, img, desc, type } = route.params;
+
   navigation.setOptions({
-    title: 'Activity',
+    title: titre,
     headerRight: () => (
       <ParameterButton navigation={navigation} />
     ),
@@ -14,7 +17,7 @@ export default function ActivityScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-
+      <Text>{titre}{img}{desc}{type}</Text>
     </View>
   );
 }
