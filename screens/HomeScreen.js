@@ -14,9 +14,9 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <ActivityItem/>
-	    <ActivityItem/>
-	    <ActivityItem/>
+      <ActivityItem titre="Activité Physique" img="activitePhysique.jpg"/>
+	    <ActivityItem titre="Courses / Ravitaillement" img="coursesRavitaillement.jpg"/>
+	    <ActivityItem titre="Autres" img="other.jpg"/>
     </View>
   );
 }
