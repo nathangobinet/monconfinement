@@ -3,17 +3,17 @@ import {StyleSheet, View, Text, Image } from 'react-native';
 import Colors from '../../constants/Colors'
 
 
-export default function ActivityItem() {
+export default function ActivityItem(props) {
     return(
         <View style={styles.container}>
 				<View style={styles.imgContainer}>
 				<Image
 					style={styles.img}
-					source={require('../../assets/images/ActivityPic/activitePhysique.jpg')}
+					source={require('../../assets/images/ActivityPic/'+props.img)}
 				/>
 				</View>
 				<View style={styles.textContainer}>
-					<Text style={styles.title}>Enorme Titre</Text>
+					<Text style={styles.title}>{props.titre}</Text>
 					<View style={styles.orangeLine}></View>
 					<Text style={styles.description}>Petite description vraiment pas mal.... Je profite de voir si ça fonctionne et si ça va bien à la ligne</Text>
 				</View>
