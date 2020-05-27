@@ -17,17 +17,17 @@ export default function ActivityItem(props) {
 			>
 			
 			<View style={styles.container}>
-					<View style={styles.imgContainer}>
-					<Image
-						style={styles.img}
-						source={props.img}
-					/>
-					</View>
-					<View style={styles.textContainer}>
-						<Text style={styles.title}>{props.titre}</Text>
-						<View style={styles.orangeLine}></View>
-						<Text style={styles.description}>{props.desc}</Text>
-					</View>
+				<View style={styles.imgContainer}>
+				<Image
+					style={styles.img}
+					source={props.img}
+				/>
+				</View>
+				<View style={styles.textContainer}>
+					<Text style={styles.title}>{props.titre}</Text>
+					<View style={styles.orangeLine}></View>
+					<Text style={styles.description}>{props.desc}</Text>
+				</View>
 			</View>
 		</TouchableOpacity>
     )
