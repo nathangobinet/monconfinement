@@ -5,7 +5,7 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 
 import useCachedResources from './hooks/useCachedResources';
 import HomeScreen from './screens/HomeScreen';
-import LinksScreen from './screens/LinksScreen';
+import SettingsScreen from './screens/SettingsScreen';
 import Colors from './constants/Colors';
 import HeaderOptions from './constants/HeaderOptions'
 import ActivityScreen from './screens/ActivityScreen';
@@ -30,7 +30,7 @@ export default function App() {
             />
             <Stack.Screen 
               name="Paramètres" 
-              component={LinksScreen} 
+              component={SettingsScreen} 
               options={ HeaderOptions } 
             />
             <Stack.Screen 
