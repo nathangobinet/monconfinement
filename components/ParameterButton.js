@@ -1,18 +1,21 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import Colors from '../constants/Colors'
 
 export default function ParameterButton({ navigation }) {
   return (
-    <Ionicons 
-      style= {styles.icon}
-      onPress={() => navigation.navigate('Paramètres')} 
-      name="md-settings" 
-      size={24} 
-      color={Colors.white} 
-    />
+    <View style={styles.icon}>
+      <TouchableOpacity onPress={() => navigation.navigate('Paramètres')} >
+        <Ionicons 
+          name="md-settings" 
+          size={24} 
+          color={Colors.white} 
+        />
+      </TouchableOpacity>
+    </View>
   );
 }
 
