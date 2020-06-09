@@ -12,7 +12,7 @@ export default function SettingsScreen() {
             <ParameterInput labelInput='Prenom' valueInput=''/>
             <Text style={styles.categorie}>Localisation</Text>
             <ParameterInput labelInput='Adresse' valueInput=''/>
-            <Button style={styles.buttonOk} title='Enregistrer' color={Colors.primay}/>
+            <Button style={styles.buttonOk} title='Enregistrer'/>
         </ScrollView>
     )
 }
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     container: {
       padding: 10,
       backgroundColor: Colors.background,
-      flexDirection: 'column'
+      flexDirection: 'column',
     },
 
     categorie: {
@@ -32,7 +32,8 @@ const styles = StyleSheet.create({
     },
 
     buttonOk: {
-        borderRadius: 5
+        borderRadius: 5,
+        backgroundColor: Colors.primary,
     }
 });
   
