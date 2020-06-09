@@ -12,7 +12,7 @@ export default function SettingsScreen() {
             <ParameterInput labelInput='Prenom' valueInput=''/>
             <Text style={styles.categorie}>Localisation</Text>
             <ParameterInput labelInput='Adresse' valueInput=''/>
-            <Button style={styles.buttonOk} title='Enregistrer' color={Colors.text}/>
+            <Button style={styles.buttonOk} title='Enregistrer' color={Colors.primay}/>
         </ScrollView>
     )
 }

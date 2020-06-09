@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import {StyleSheet, View, Text } from 'react-native';
 import Colors from '../../constants/Colors'
-import { TouchableOpacity, TextInput } from 'react-native-gesture-handler';
+import { TextInput } from 'react-native-gesture-handler';
 
 
 export default function ParameterInput(props) {
+    const [ value, setValue ] = useState(props.valueInput)
     return(
-            <View style={styles.inputContainer}>
-                <Text style={styles.label}>{props.labelInput}</Text>
-                <TextInput style={styles.input} placeholder="Insérer le texte ici" value={props.valueInput} />
-            </View>
+        <View style={styles.inputContainer}>
+            <Text style={styles.label}>{props.labelInput}</Text>
+            <TextInput style={styles.input} placeholder="Insérer le texte ici" value={value} onChange={(e) => setValue(e.target.value)} />
+        </View>
     )
 }
 
