@@ -16,23 +16,21 @@ const LOCATION_TASK_NAME = 'background-location-task';
 
 const Stack = createStackNavigator();
 
-export default function App() {
-  const isLoadingComplete = useCachedResources();
-
-  /* Try to set up location detection */
-
-  (async function startBackgroundLocation() {
-    const { status } = await Location.requestPermissionsAsync();
-    if (status === 'granted') {
-      Location.get
+(async function startBackgroundLocation() {
+  const { status } = await Location.requestPermissionsAsync();
+  if (status === 'granted') {
+    try {
       await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
         accuracy: Location.Accuracy.Balanced,
       });
+    } catch(Error) {
+      console.log("Device does not support Async Update Location");
     }
-  })();
-    
+  }
+})();
 
-  /* Try to set up location detection */
+export default function App() {
+  const isLoadingComplete = useCachedResources();
 
   if (!isLoadingComplete) {
     return null;
