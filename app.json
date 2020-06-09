@@ -24,7 +24,11 @@
       "**/*"
     ],
     "ios": {
+      "config": {
+        "googleMapsApiKey": "AIzaSyCo0vxHXHTA9u3_zAwNHhewrxz458bYNzc"
+      },
       "supportsTablet": true,
+      "bundleIdentifier": "com.fip2.monconfinement",
       "icon": "./assets/images/icon.png",
       "infoPlist": {
         "UIBackgroundModes": [
@@ -36,10 +40,15 @@
       "favicon": "./assets/images/favicon.png"
     }, 
     "android": {
+      "package":"com.fip2.monconfinement",
       "icon": "./assets/images/icon.png",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/icon-white.png",
         "backgroundColor": "#DF7861"
+      },"config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCp-AIzaSyCPNEGI_sFkv7S9UKhkiaaqfAdiklKe-SI"
+        }
       }
     }, 
     "androidStatusBar": {

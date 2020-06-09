@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {StyleSheet, View, Text } from 'react-native';
 import Colors from '../../constants/Colors'
 import { TextInput } from 'react-native-gesture-handler';
 
 
 export default function ParameterInput(props) {
-    const [ value, setValue ] = useState(props.valueInput);
+    const [ value, setValue ] = useState('');
+    
+    useEffect(() => {
+        props.parentRef.current = value;
+    }, [value]);
+
+    useEffect(() => {
+        setValue(props.valueInput);
+    }, [props.valueInput])
+
     return(
         <View style={styles.inputContainer}>
             <Text style={styles.label}>{props.labelInput}</Text>

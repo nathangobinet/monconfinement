@@ -76,8 +76,8 @@ TaskManager.defineTask(LOCATION_TASK_NAME, ({ data, error }) => {
     return;
   }
   if (data) {
-    const { locations } = data;
-    console.log('Success', JSON.stringify(locations));
+    const { location } = data;
+    console.log('Success', JSON.stringify(location));
   }
 });
 /* Try to set up location detection */

@@ -1,85 +1,63 @@
 import { ScrollView, Text, StyleSheet, Button, AsyncStorage } from "react-native";
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import Colors from '../constants/Colors';
 
 import ParameterInput from '../components/SettingsScreen/ParameterInput';
 
-export default function SettingsScreen() {
+const inputs = ['nom', 'prenom', 'localisation'];
+
+async function saveData(inputNom, inputPrenom, inputLocation) {
+    try {
+        await AsyncStorage.setItem('nom', inputNom.current);
+        await AsyncStorage.setItem('prenom', inputPrenom.current);
+        await AsyncStorage.setItem('localisation', inputLocation.current);
+    } catch (error) {
+        console.log('Une erreur');
+    }
+}
+
+async function getData() {
+    return Promise.all(inputs.map(async (input) =>  {
+        try {
+            return await AsyncStorage.getItem(input);
+        } catch (error) {
+            return '';
+        }
+    }));
+}
+
+export default  function SettingsScreen() {
+
+    const inputNom = React.useRef(null);
+    const inputPrenom = React.useRef(null);
+    const inputLocation = React.useRef(null);
+
+    const [inputValues, setInputValues] = useState({nom: '', prenom: '', localisation: ''});
+    
+    useEffect(() => {(
+        async () => {
+            const inputVals = await getData();
+            setInputValues({nom: inputVals[0], prenom: inputVals[1], localisation: inputVals[2]});
+        })();
+    }, []);
 
     return(
         <ScrollView style={styles.container}>
             <Text style={styles.categorie} >Coordonnées basiques</Text>
-            <ParameterInput labelInput='Nom' valueInput=''/>
-            <ParameterInput labelInput='Prenom' valueInput=''/>
+            <ParameterInput parentRef={inputNom} labelInput='Nom' valueInput={inputValues.nom}/>
+            <ParameterInput parentRef={inputPrenom} labelInput='Prenom' valueInput={inputValues.prenom}/>
             <Text style={styles.categorie}>Localisation</Text>
-            <ParameterInput labelInput='Adresse' valueInput=''/>
-
+            <ParameterInput parentRef={inputLocation} labelInput='Adresse' valueInput={inputValues.localisation}/>
             <Button
-                style={styles.formButton}
                 title="Save Data"
                 accessibilityLabel="Save Data"
-
-                onPress={
-                    async () => {
-                        try {
-                            await AsyncStorage.setItem(
-                                '@MySuperStore:key',
-                                'I like to save it.'
-                        );
-                        } catch (error) {
-                            // Error saving data
-                        }
-                    }
-                }
+                onPress={() => {saveData(inputNom, inputPrenom, inputLocation)}}
             />
-
-            <Button
-                style={styles.formButton}
-                title="Get Data"
-                accessibilityLabel="Get Key"
-
-                onPress={
-                    async () => {
-                        try {
-                            const value = await AsyncStorage.getItem('@MySuperStore:key');
-                            if (value !== null) {
-                                // We have data!!
-                                console.log(value);
-                            }
-                        } catch (error) {
-                            // Error retrieving data
-                        }
-                    }
-                }
-            />
-
-            <Button
-                style={styles.formButton}
-                title="Remove Data"
-                accessibilityLabel="Get Key"
-
-                onPress={
-                    async () => {
-                        try {
-                            await AsyncStorage.removeItem('@MySuperStore:key')
-                        } catch (error) {
-                            // Error retrieving data
-                        }
-                    }
-                }
-            />
-
         </ScrollView>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
-    container: {
-      padding: 10,
-      backgroundColor: Colors.background,
-      flexDirection: 'column',
-    },
-
     categorie: {
         color: Colors.text,
         fontWeight: "700",
@@ -87,10 +65,10 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
 
-    buttonOk: {
-        borderRadius: 5,
-        backgroundColor: Colors.primary,
-        color: Colors.primary
+    container: {
+      backgroundColor: Colors.background,
+      flexDirection: 'column',
+      padding: 10,
     }
 });
   
