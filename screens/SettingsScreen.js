@@ -8,11 +8,10 @@ export default function SettingsScreen() {
     return(
         <ScrollView style={styles.container}>
             <Text style={styles.categorie} >Coordonnées basiques</Text>
-            <ParameterInput />
-            <ParameterInput />
+            <ParameterInput label='Nom' val=''/>
+            <ParameterInput label='Prenom' val=''/>
             <Text style={styles.categorie} >Localisation</Text>
-            <ParameterInput />
-            <ParameterInput />
+            <ParameterInput label='Adresse' val=''/>
         </ScrollView>
     )
 }
