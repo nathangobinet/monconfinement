@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import {StyleSheet, View, Text } from 'react-native';
 import Colors from '../../constants/Colors'
 import { TextInput } from 'react-native-gesture-handler';
