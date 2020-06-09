@@ -8,7 +8,7 @@ export default function ParameterInput(props) {
     return(
             <View style={styles.inputContainer}>
                 <Text style={styles.label}>{props.labelInput}</Text>
-                <TextInput style={styles.input} placeholder="texte ici" value={props.valueInput} />
+                <TextInput style={styles.input} placeholder="Insérer le texte ici" value={props.valueInput} />
             </View>
     )
 }
