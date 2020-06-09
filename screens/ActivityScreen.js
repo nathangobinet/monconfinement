@@ -10,6 +10,7 @@ export default function ActivityScreen({ route, navigation}) {
 
   navigation.setOptions({
     title: titre,
+    // eslint-disable-next-line react/display-name
     headerRight: () => (
       <ParameterButton navigation={navigation} />
     ),
@@ -24,8 +25,8 @@ export default function ActivityScreen({ route, navigation}) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 10,
+    backgroundColor: Colors.background,
     flex: 1,
-    backgroundColor: Colors.background
+    paddingTop: 10
   },
 });

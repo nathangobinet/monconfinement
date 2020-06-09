@@ -10,6 +10,7 @@ import ListeActivite from '../constants/listeActivite';
 export default function HomeScreen({ navigation }) {
 
   navigation.setOptions({
+    // eslint-disable-next-line react/display-name
     headerRight: () => (
       <ParameterButton navigation={navigation} />
     )});
@@ -37,8 +38,8 @@ export default function HomeScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 10,
+    backgroundColor: Colors.background,
     flex: 1,
-    backgroundColor: Colors.background
+    paddingTop: 10
   },
 });

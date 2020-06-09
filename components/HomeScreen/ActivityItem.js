@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {StyleSheet, View, Text, Image } from 'react-native';
 import Colors from '../../constants/Colors'
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -35,16 +35,16 @@ export default function ActivityItem(props) {
 
 const styles = StyleSheet.create({
 	container: {
-		margin: 10,
-		width: '95%',
-		height: 150,
-		borderRadius: 5,
-
 		backgroundColor: Colors.white,
-
+		borderRadius: 5,
+		elevation: 3,
 		flexDirection: 'row',
 
-		shadowColor: "#111",
+		height: 150,
+
+		margin: 10,
+
+		shadowColor: Colors.shadowColor,
 		shadowOffset: {
 			width: 0,
 			height: 1,
@@ -52,25 +52,39 @@ const styles = StyleSheet.create({
 		shadowOpacity: 0.22,
 		shadowRadius: 2.22,
 
-		elevation: 3,
+		width: '95%',
 	},
 
-	imgContainer: {
-		backgroundColor: Colors.secondary,
-
-		borderTopLeftRadius: 5,
-    	borderBottomLeftRadius: 5,
-		marginRight: 10,
-
-		flex: 1
+	description: {
+		color: Colors.text,
+		fontSize: 15,
+		marginTop: 10
 	},
 
 	img: {
+		borderBottomLeftRadius: 5,
+        borderTopLeftRadius: 5,
 		flex: 1,
-        width: null,
 		height: null,
-		borderTopLeftRadius: 5,
-    	borderBottomLeftRadius: 5,
+    width: null,
+	},
+
+	imgContainer:{
+		backgroundColor: Colors.secondary,
+
+		borderBottomLeftRadius: 5,
+    borderTopLeftRadius: 5,
+		flex: 1,
+
+		marginRight: 10
+	},
+
+	orangeLine: {
+		borderBottomColor: Colors.primary,
+		borderBottomWidth: 2,
+		height: 1,
+		marginBottom: 5,
+    width: 75,
 	},
 
 	textContainer: {
@@ -81,19 +95,5 @@ const styles = StyleSheet.create({
 	title : {
 		fontSize: 20,
 		marginBottom: 5
-	},
-
-	orangeLine: {
-		height: 1,
-		width: 75,
-		marginBottom: 5,
-		borderBottomColor: Colors.primary,
-    	borderBottomWidth: 2,
-	},
-
-	description: {
-		fontSize: 15,
-		marginTop: 10,
-		color: Colors.text
 	}
 })

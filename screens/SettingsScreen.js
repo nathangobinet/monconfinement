@@ -18,22 +18,22 @@ export default function SettingsScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: {
-      padding: 10,
-      backgroundColor: Colors.background,
-      flexDirection: 'column',
+    buttonOk: {
+        backgroundColor: Colors.primary,
+        borderRadius: 5,
     },
 
     categorie: {
-        fontWeight: "700",
         color: Colors.text,
+        fontWeight: "700",
         marginBottom: 15,
         marginTop: 10,
     },
 
-    buttonOk: {
-        borderRadius: 5,
-        backgroundColor: Colors.primary,
+    container: {
+      backgroundColor: Colors.background,
+      flexDirection: 'column',
+      padding: 10,
     }
 });
   
