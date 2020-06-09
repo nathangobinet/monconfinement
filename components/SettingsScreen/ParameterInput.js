@@ -18,7 +18,7 @@ export default function ParameterInput(props) {
     return(
         <View style={styles.inputContainer}>
             <Text style={styles.label}>{props.labelInput}</Text>
-            <TextInput style={styles.input} placeholder="Insérer le texte ici" value={value} onChange={(e) => setValue(e.target.value)} />
+            <TextInput style={styles.input} placeholder="Insérer le texte ici" value={value} onChangeText={value => setValue(value)} />
         </View>
     )
 }

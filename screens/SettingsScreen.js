@@ -51,7 +51,7 @@ export default  function SettingsScreen() {
             <Button
                 title="Save Data"
                 accessibilityLabel="Save Data"
-                onPress={() => {saveData(inputNom, inputPrenom, inputLocation)}}
+                onPress={() => { saveData(inputNom, inputPrenom, inputLocation); }}
             />
         </ScrollView>
     );
