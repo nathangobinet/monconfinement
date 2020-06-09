@@ -80,8 +80,8 @@ const styles = StyleSheet.create({
     },
 
     categorie: {
-        fontWeight: "700",
         color: Colors.text,
+        fontWeight: "700",
         marginBottom: 15,
         marginTop: 10,
     },

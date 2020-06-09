@@ -5,7 +5,7 @@ import { TextInput } from 'react-native-gesture-handler';
 
 
 export default function ParameterInput(props) {
-    const [ value, setValue ] = useState(props.valueInput)
+    const [ value, setValue ] = useState(props.valueInput);
     return(
         <View style={styles.inputContainer}>
             <Text style={styles.label}>{props.labelInput}</Text>
@@ -15,27 +15,27 @@ export default function ParameterInput(props) {
 }
 
 const styles = StyleSheet.create({
-	inputContainer: {
-        padding: 20,
-        marginBottom: 10,
-        display:"flex",
-        flexDirection: "row",
-
-        backgroundColor: Colors.white,
-		borderRadius: 5,
-
-        borderWidth: 1,
-        borderColor: '#CCC',
-    },
-    
-    input: {
+	input: {
+        color: Colors.primary,
         flex: 2,
         textAlign: "right",
-        color: Colors.primary,
+    },
+    
+    inputContainer: {
+        backgroundColor: Colors.white,
+        borderColor: Colors.borderColor,
+        borderRadius: 5,
+        borderWidth: 1,
+
+        display:"flex",
+		flexDirection: "row",
+
+        marginBottom: 10,
+        padding: 20,
     },
 
     label: {
-        flex: 1,
         color: Colors.text,
+        flex: 1,
     }
 })
