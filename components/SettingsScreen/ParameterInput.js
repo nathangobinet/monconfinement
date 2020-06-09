@@ -7,8 +7,8 @@ import { TouchableOpacity, TextInput } from 'react-native-gesture-handler';
 export default function ParameterInput(props) {
     return(
             <View style={styles.inputContainer}>
-                <Text style={styles.label}>{props.label}</Text>
-                <TextInput style={styles.input} placeholder="texte ici">{props.val}</TextInput>
+                <Text style={styles.label}>{props.labelInput}</Text>
+                <TextInput style={styles.input} placeholder="texte ici" value={props.valueInput} />
             </View>
     )
 }

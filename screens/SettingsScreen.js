@@ -1,4 +1,4 @@
-import { ScrollView, Text, StyleSheet } from "react-native";
+import { ScrollView, Text, StyleSheet, Button } from "react-native";
 import * as React from 'react';
 import Colors from '../constants/Colors';
 
@@ -8,10 +8,11 @@ export default function SettingsScreen() {
     return(
         <ScrollView style={styles.container}>
             <Text style={styles.categorie} >Coordonnées basiques</Text>
-            <ParameterInput label='Nom' val=''/>
-            <ParameterInput label='Prenom' val=''/>
-            <Text style={styles.categorie} >Localisation</Text>
-            <ParameterInput label='Adresse' val=''/>
+            <ParameterInput labelInput='Nom' valueInput=''/>
+            <ParameterInput labelInput='Prenom' valueInput=''/>
+            <Text style={styles.categorie}>Localisation</Text>
+            <ParameterInput labelInput='Adresse' valueInput=''/>
+            <Button />
         </ScrollView>
     )
 }
