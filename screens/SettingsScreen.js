@@ -17,15 +17,14 @@ export default function SettingsScreen() {
             <Button
                 style={styles.formButton}
                 title="Save Data"
-                color="#2196f3"
-                accessibilityLabel="Get Key"
+                accessibilityLabel="Save Data"
 
                 onPress={
                     async () => {
                         try {
-                        await AsyncStorage.setItem(
-                            '@MySuperStore:key',
-                            'I like to save it.'
+                            await AsyncStorage.setItem(
+                                '@MySuperStore:key',
+                                'I like to save it.'
                         );
                         } catch (error) {
                             // Error saving data
@@ -37,7 +36,6 @@ export default function SettingsScreen() {
             <Button
                 style={styles.formButton}
                 title="Get Data"
-                color="#2196f3"
                 accessibilityLabel="Get Key"
 
                 onPress={
@@ -48,6 +46,22 @@ export default function SettingsScreen() {
                                 // We have data!!
                                 console.log(value);
                             }
+                        } catch (error) {
+                            // Error retrieving data
+                        }
+                    }
+                }
+            />
+
+            <Button
+                style={styles.formButton}
+                title="Remove Data"
+                accessibilityLabel="Get Key"
+
+                onPress={
+                    async () => {
+                        try {
+                            await AsyncStorage.removeItem('@MySuperStore:key')
                         } catch (error) {
                             // Error retrieving data
                         }
