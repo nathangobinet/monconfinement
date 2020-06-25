@@ -49,7 +49,7 @@ export default  function SettingsScreen() {
             <ParameterInput parentRef={inputPrenom} labelInput='Prenom' valueInput={inputValues.prenom}/>
             <Text style={styles.categorie}>Localisation</Text>
             <ParameterInput parentRef={inputLocation} labelInput='Adresse' valueInput={inputValues.localisation}/>
-            <ParameterMap localisation={inputValues.localisation}></ParameterMap>
+            <ParameterMap updateinputValues={setInputValues} inputValues={inputValues}></ParameterMap>
             <Button
                 title="Save Data"
                 accessibilityLabel="Save Data"

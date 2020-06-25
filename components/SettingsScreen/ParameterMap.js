@@ -1,4 +1,4 @@
-import { View, Dimensions, StyleSheet, Image, Text, ActivityIndicator } from "react-native";
+import { View, Dimensions, StyleSheet, Image, Text, ActivityIndicator, Alert } from "react-native";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import MapView from 'react-native-maps'
 import React, { useState } from 'react';
@@ -18,29 +18,44 @@ function transitionViews(setMapDisplay, setpreviewDisplay) {
   setpreviewDisplay({ display:'none'});
 }
 
-async function setUpMapLocation(setMapRegion, setAnimation) {
+async function locationGranted() {
   let { status } = await Location.requestPermissionsAsync();
-  if (status === 'granted') {
-    setAnimation(true);
-    let location = await Location.getCurrentPositionAsync({});
-    setMapRegion({...location.coords, latitudeDelta: .001, longitudeDelta: .001})
-    setAnimation(false);
-  }
+  return status === 'granted';
 }
 
-function handleLocate(setMapDisplay, setpreviewDisplay, setMapRegion, setAnimation) {
+async function getLocation(setAnimation) {
+  setAnimation(true);
+  return await Location.getCurrentPositionAsync({});
+}
+
+async function setUpMapLocation(location, setMapRegion, setAnimation) {
+  setMapRegion({...location.coords, latitudeDelta: .001, longitudeDelta: .001});
+  setAnimation(false);
+}
+
+async function handleLocate(setMapDisplay, setpreviewDisplay, setMapRegion, setAnimation, inputValues, updateinputValues) {
+  if(!await locationGranted()) return;
   transitionViews(setMapDisplay, setpreviewDisplay);
-  setUpMapLocation(setMapRegion, setAnimation)
+  const location = await getLocation(setAnimation);
+  setUpMapLocation(location, setMapRegion, setAnimation);
+  const [adressObject] = await Location.reverseGeocodeAsync(location.coords);
+  const adressString = `${adressObject.name} ${adressObject.street}`;
+  updateinputValues({...inputValues, localisation: adressString });
 }
 
-export default function ParameterMap() {
+export default function ParameterMap(props) {
+  const { inputValues, updateinputValues } = props;
+  if(inputValues.localisation) {
+    console.log(inputValues.localisation);
+  }
+
   const [mapDisplay, setMapDisplay] = useState({display: 'none'});
   const [previewDisplay, setpreviewDisplay] = useState({display: 'flex'});
   const [mapRegion, setMapRegion] = useState(defaultRegion);
   const [animation, setAnimation] = useState(false);
   return (
     <View style={styles.container}>
-      <TouchableOpacity activeOpacity={.8} onPress={() => handleLocate(setMapDisplay, setpreviewDisplay, setMapRegion, setAnimation)}>
+      <TouchableOpacity activeOpacity={.8} onPress={() => handleLocate(setMapDisplay, setpreviewDisplay, setMapRegion, setAnimation, inputValues, updateinputValues)}>
         <Image source={imagePreview} style={[styles.imageStyle, previewDisplay]}/>
         <View style={styles.buttonStyle} activeOpacity={.4}>
           <Text style={styles.buttonTextStyle}>Me localiser</Text>
