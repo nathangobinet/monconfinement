@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-color-literals */
 import * as React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 
@@ -23,9 +24,8 @@ export default function ActivityScreen({ route, navigation}) {
           style={styles.activityImage}
 					source={img}
 				/>
-        <View style={styles.overTitleBackground}>
-          <Text style={styles.overTitle} >Défoulez vous, tout en étant en règle.</Text>
-        </View>
+        
+      <Text style={styles.overTitle} >Défoulez vous, tout en étant en règle.</Text>
 			</View>
       <Text>Yes</Text>
       <Text>{titre}{img}{desc}{type}</Text>
@@ -49,20 +49,17 @@ const styles = StyleSheet.create({
   },
 
   overTitle: {
-    backgroundColor: Colors.text,
+    backgroundColor: "rgba(0,0,0,.7)",
+    bottom: 20,
     color: Colors.white,
-    fontWeight: 'Bold',
-    opacity: 1,
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginLeft: 25,
+    marginRight: 25,
+    padding: 10,
     position: 'absolute',
   },
 
-  overTitleBackground: {
-    backgroundColor: Colors.text,
-    bottom: 50,
-    marginLeft: 25,
-    marginRight: 25,
-    padding: 15,
-    position: 'relative',
-  },
+
 
 });

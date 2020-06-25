@@ -70,14 +70,15 @@ const styles = StyleSheet.create({
 });
 
 /* Try to set up location detection */
-TaskManager.defineTask(LOCATION_TASK_NAME, ({ data, error }) => {
+TaskManager.defineTask(LOCATION_TASK_NAME, async ({ data, error }) => {
   if (error) {
     console.log('Error', error)
     return;
   }
   if (data) {
-    const { location } = data;
-    console.log('Success', JSON.stringify(location));
+    const { locations } = data;
+    const adress = await Location.reverseGeocodeAsync(locations[0].coords);
+    console.log('Success', adress);
   }
 });
 /* Try to set up location detection */

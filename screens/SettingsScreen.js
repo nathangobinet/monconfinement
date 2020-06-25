@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Colors from '../constants/Colors';
 
 import ParameterInput from '../components/SettingsScreen/ParameterInput';
+import ParameterMap from '../components/SettingsScreen/ParameterMap';
 
 const inputs = ['nom', 'prenom', 'localisation'];
 
@@ -48,6 +49,7 @@ export default  function SettingsScreen() {
             <ParameterInput parentRef={inputPrenom} labelInput='Prenom' valueInput={inputValues.prenom}/>
             <Text style={styles.categorie}>Localisation</Text>
             <ParameterInput parentRef={inputLocation} labelInput='Adresse' valueInput={inputValues.localisation}/>
+            <ParameterMap localisation={inputValues.localisation}></ParameterMap>
             <Button
                 title="Save Data"
                 accessibilityLabel="Save Data"

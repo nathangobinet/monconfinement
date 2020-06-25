@@ -6,4 +6,5 @@ export default {
   white: '#ffffff',
   borderColor: '#CCC',
   shadowColor: "#111",
+  black: "#000",
 };
