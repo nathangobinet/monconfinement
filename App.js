@@ -76,9 +76,9 @@ TaskManager.defineTask(LOCATION_TASK_NAME, async ({ data, error }) => {
     return;
   }
   if (data) {
-    const { locations } = data;
-    const adress = await Location.reverseGeocodeAsync(locations[0].coords);
-    console.log('Success', adress);
+    // const { locations } = data;
+    // const adress = await Location.reverseGeocodeAsync(locations[0].coords);
+    console.log('Success');
   }
 });
 /* Try to set up location detection */
