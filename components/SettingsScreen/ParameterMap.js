@@ -1,8 +1,9 @@
-import { View, Dimensions, StyleSheet, Image, Text } from "react-native";
+import { View, Dimensions, StyleSheet, Image, Text, ActivityIndicator } from "react-native";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import MapView from 'react-native-maps'
 import React, { useState } from 'react';
 import Colors from '../../constants/Colors';
+import * as Location from 'expo-location';
 
 const imagePreview = require('../../assets/images/map_preview.jpg');
 const defaultRegion = {
@@ -17,33 +18,46 @@ function transitionViews(setMapDisplay, setpreviewDisplay) {
   setpreviewDisplay({ display:'none'});
 }
 
-function setUpMapLocation(setMapRegion) {
-
+async function setUpMapLocation(setMapRegion, setAnimation) {
+  let { status } = await Location.requestPermissionsAsync();
+  if (status === 'granted') {
+    setAnimation(true);
+    let location = await Location.getCurrentPositionAsync({});
+    setMapRegion({...location.coords, latitudeDelta: .001, longitudeDelta: .001})
+    setAnimation(false);
+  }
 }
 
-function handleLocate(setMapDisplay, setpreviewDisplay, setMapRegion) {
+function handleLocate(setMapDisplay, setpreviewDisplay, setMapRegion, setAnimation) {
   transitionViews(setMapDisplay, setpreviewDisplay);
-  setUpMapLocation(setMapRegion)
+  setUpMapLocation(setMapRegion, setAnimation)
 }
 
 export default function ParameterMap() {
   const [mapDisplay, setMapDisplay] = useState({display: 'none'});
   const [previewDisplay, setpreviewDisplay] = useState({display: 'flex'});
   const [mapRegion, setMapRegion] = useState(defaultRegion);
+  const [animation, setAnimation] = useState(false);
   return (
-    <TouchableOpacity activeOpacity={.8} onPress={() => handleLocate(setMapDisplay, setpreviewDisplay, setMapRegion)}>
-      <View style={styles.container}>
+    <View style={styles.container}>
+      <TouchableOpacity activeOpacity={.8} onPress={() => handleLocate(setMapDisplay, setpreviewDisplay, setMapRegion, setAnimation)}>
         <Image source={imagePreview} style={[styles.imageStyle, previewDisplay]}/>
         <View style={styles.buttonStyle} activeOpacity={.4}>
           <Text style={styles.buttonTextStyle}>Me localiser</Text>
         </View>
-        <MapView style={[styles.mapStyle, mapDisplay]} region={mapRegion}/>
+      </TouchableOpacity>
+      <MapView style={[styles.mapStyle, mapDisplay]} region={mapRegion}/>
+      <View style={styles.acitivityView}>
+        <ActivityIndicator size="large" color={Colors.primary} hidesWhenStopped={true} animating={animation} />
       </View>
-    </TouchableOpacity>
+    </View>
   ); 
 }
 
 const styles = StyleSheet.create({
+  acitivityView: {
+    position: "absolute",
+  },
   buttonStyle: {
     backgroundColor: Colors.primary,
     left: "100%",
