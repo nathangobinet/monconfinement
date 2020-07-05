@@ -2,7 +2,8 @@
 import * as React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 
-import Colors from '../constants/Colors'
+import Colors from '../constants/Colors';
+import ActivityInfo from '../constants/listeActivite';
 import ParameterButton from '../components/ParameterButton';
 import ActivityTitle from '../components/ActivityScreen/ActivityTitle';
 
@@ -30,10 +31,17 @@ export default function ActivityScreen({ route, navigation}) {
         <ActivityTitle type={type} />
         
 			</View>
-      <Text>Yes</Text>
-      <Text>{titre}{img}{desc}{type}</Text>
+      <View>
+        <Text>Description : {getOverallInfo(type).desc}</Text>
+        <Text>Informations Supplémentaires : {getOverallInfo(type).infoSupp}</Text>
+        <Text>Renseignements nécessaires : {getOverallInfo(type).need}</Text>
+      </View>
     </View>
   );
+}
+
+function getOverallInfo(type) {
+  return ActivityInfo.filter(x => x.type === type)[0];
 }
 
 const styles = StyleSheet.create({
