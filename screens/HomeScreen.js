@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 
 import ParameterButton from '../components/ParameterButton';
 import ActivityItem from '../components/HomeScreen/ActivityItem'
+import ActivityLeft from '../components/HomeScreen/ActivityLeft'
 import Colors from '../constants/Colors';
 
 import ListeActivite from '../constants/listeActivite';
@@ -32,6 +33,7 @@ export default function HomeScreen({ navigation }) {
             );
         })
       }
+      <ActivityLeft />
     </View>
   );
 }
