@@ -41,7 +41,6 @@ async function handleLocate(setMapDisplay, setpreviewDisplay, setMapRegion, setA
   const [adressObject] = await Location.reverseGeocodeAsync(location.coords);
   const adressString = `${adressObject.name} ${adressObject.street}`;
   location.adress = adressString;
-  console.log(location);
   setValue(location);
 }
 
@@ -56,9 +55,7 @@ export default function ParameterMap(props) {
     <View style={styles.container}>
       <TouchableOpacity activeOpacity={.8} onPress={() => handleLocate(setMapDisplay, setpreviewDisplay, setMapRegion, setAnimation, setValue)}>
         <Image source={imagePreview} style={[styles.imageStyle, previewDisplay]}/>
-        <View style={styles.buttonStyle} activeOpacity={.4}>
-          <Text style={styles.buttonTextStyle}>Me localiser</Text>
-        </View>
+        <Text style={styles.buttonStyle}>Me localiser</Text>
       </TouchableOpacity>
       <MapView style={[styles.mapStyle, mapDisplay]} region={mapRegion}/>
       <View style={styles.acitivityView}>
@@ -74,15 +71,13 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     backgroundColor: Colors.primary,
+    color: Colors.white,
     left: "100%",
     padding: 10,
     position: "absolute",
     top: "100%",
     transform: [{translateX: Dimensions.get('window').width * -0.6 }, {translateY: 300 * -0.57 }],
   }, 
-  buttonTextStyle: {
-    color: Colors.white,
-  },
   container: {
     alignItems: 'center',
     backgroundColor: Colors.white,
