@@ -1,72 +1,77 @@
-import { ScrollView, Text, StyleSheet, Button, AsyncStorage } from "react-native";
+import { ScrollView, Text, StyleSheet, AsyncStorage } from "react-native";
 import React, { useEffect, useState } from 'react';
 import Colors from '../constants/Colors';
 
 import ParameterInput from '../components/SettingsScreen/ParameterInput';
 import ParameterMap from '../components/SettingsScreen/ParameterMap';
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-const inputs = ['nom', 'prenom', 'localisation'];
-
-async function saveData(inputNom, inputPrenom, inputLocation) {
-    try {
-        await AsyncStorage.setItem('nom', inputNom.current);
-        await AsyncStorage.setItem('prenom', inputPrenom.current);
-        await AsyncStorage.setItem('localisation', inputLocation.current);
-    } catch (error) {
-        console.log('Une erreur');
+function saveData(datas) {
+    for(const prop in datas){
+        AsyncStorage.setItem(prop, JSON.stringify(datas[prop]));
     }
 }
 
-async function getData() {
-    return Promise.all(inputs.map(async (input) =>  {
-        try {
-            return await AsyncStorage.getItem(input);
-        } catch (error) {
-            return '';
-        }
-    }));
+async function getData(inputValues) {
+    const loadData = {...inputValues};
+    for(const [key] of Object.entries(loadData)) {
+        const item = await AsyncStorage.getItem(key);
+        if(item !== null) loadData[key] = JSON.parse(item);
+    }
+    return loadData;
 }
 
 export default  function SettingsScreen() {
+    const [nom, setNom] = useState('');
+    const [prenom, setPrenom]  = useState('');
+    const [localisation, setLocalisation]  = useState({adress: ''});
 
-    const inputNom = React.useRef(null);
-    const inputPrenom = React.useRef(null);
-    const inputLocation = React.useRef(null);
-
-    const [inputValues, setInputValues] = useState({nom: '', prenom: '', localisation: ''});
-    
+    // Init the state with the saved values
     useEffect(() => {(
         async () => {
-            const inputVals = await getData();
-            setInputValues({nom: inputVals[0], prenom: inputVals[1], localisation: inputVals[2]});
+            const savedVals = await getData({nom, prenom, localisation});
+            setNom(savedVals.nom); 
+            setPrenom(savedVals.prenom); 
+            setLocalisation(savedVals.localisation);
         })();
     }, []);
 
     return(
         <ScrollView style={styles.container}>
             <Text style={styles.categorie} >Coordonnées basiques</Text>
-            <ParameterInput parentRef={inputNom} labelInput='Nom' valueInput={inputValues.nom}/>
-            <ParameterInput parentRef={inputPrenom} labelInput='Prenom' valueInput={inputValues.prenom}/>
+            <ParameterInput setValue={setNom} labelInput='Nom' value={nom}/>
+            <ParameterInput setValue={setPrenom} labelInput='Prenom' value={prenom}/>
             <Text style={styles.categorie}>Localisation</Text>
-            <ParameterInput parentRef={inputLocation} labelInput='Adresse' valueInput={inputValues.localisation}/>
-            <ParameterMap updateinputValues={setInputValues} inputValues={inputValues}></ParameterMap>
-            <Button
-                title="Save Data"
-                accessibilityLabel="Save Data"
-                onPress={() => { saveData(inputNom, inputPrenom, inputLocation); }}
-            />
+            <ParameterInput labelInput='Adresse' value={localisation.adress} disable />
+            <ParameterMap setValue={setLocalisation}></ParameterMap>
+            <TouchableOpacity 
+                style={styles.btn} 
+                activeOpacity={.7} 
+                onPress={() => { saveData({nom, prenom, localisation}); }}
+            >
+                <Text style={styles.btnText}>Sauvegarder</Text>
+            </TouchableOpacity>
         </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
+    btn: {
+        backgroundColor: Colors.primary,
+        padding: 14,
+    },
+
+    btnText: {
+        color: Colors.white,
+        fontWeight: 'bold',
+        textAlign: "center",
+    },
     categorie: {
         color: Colors.text,
         fontWeight: "700",
         marginBottom: 15,
         marginTop: 10,
     },
-
     container: {
       backgroundColor: Colors.background,
       flexDirection: 'column',

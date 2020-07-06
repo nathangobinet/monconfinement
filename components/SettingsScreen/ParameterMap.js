@@ -1,7 +1,7 @@
-import { View, Dimensions, StyleSheet, Image, Text, ActivityIndicator, Alert } from "react-native";
+import { View, Dimensions, StyleSheet, Image, Text, ActivityIndicator } from "react-native";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import MapView from 'react-native-maps'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Colors from '../../constants/Colors';
 import * as Location from 'expo-location';
 
@@ -33,29 +33,38 @@ async function setUpMapLocation(location, setMapRegion, setAnimation) {
   setAnimation(false);
 }
 
-async function handleLocate(setMapDisplay, setpreviewDisplay, setMapRegion, setAnimation, inputValues, updateinputValues) {
+async function handleLocate(setMapDisplay, setpreviewDisplay, setMapRegion, setAnimation, setValue) {
   if(!await locationGranted()) return;
   transitionViews(setMapDisplay, setpreviewDisplay);
   const location = await getLocation(setAnimation);
   setUpMapLocation(location, setMapRegion, setAnimation);
   const [adressObject] = await Location.reverseGeocodeAsync(location.coords);
   const adressString = `${adressObject.name} ${adressObject.street}`;
-  updateinputValues({...inputValues, localisation: adressString });
+  location.adress = adressString;
+  console.log(location);
+  setValue(location);
 }
 
-export default function ParameterMap(props) {
-  const { inputValues, updateinputValues } = props;
-  if(inputValues.localisation) {
-    console.log(inputValues.localisation);
-  }
+/**
+ * C'est globalement bien dégueu la facon dont tous les états sont générés
+ * On a un seul etat maitre la haut
+ * Les sous composant update leur état local dès que cet etat change (= triche ?)
+ * Du coup c'est chiant de manipuler les états propre à chacun
+ * A refaire au propre ?
+ * Avec un état pour chacun ?
+ * Et l'enfant modifie l'état du père ?
+ */
 
+export default function ParameterMap(props) {
+  const { setValue } = props;
   const [mapDisplay, setMapDisplay] = useState({display: 'none'});
   const [previewDisplay, setpreviewDisplay] = useState({display: 'flex'});
   const [mapRegion, setMapRegion] = useState(defaultRegion);
   const [animation, setAnimation] = useState(false);
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity activeOpacity={.8} onPress={() => handleLocate(setMapDisplay, setpreviewDisplay, setMapRegion, setAnimation, inputValues, updateinputValues)}>
+      <TouchableOpacity activeOpacity={.8} onPress={() => handleLocate(setMapDisplay, setpreviewDisplay, setMapRegion, setAnimation, setValue)}>
         <Image source={imagePreview} style={[styles.imageStyle, previewDisplay]}/>
         <View style={styles.buttonStyle} activeOpacity={.4}>
           <Text style={styles.buttonTextStyle}>Me localiser</Text>

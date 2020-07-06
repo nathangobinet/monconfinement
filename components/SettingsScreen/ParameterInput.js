@@ -1,24 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {StyleSheet, View, Text } from 'react-native';
 import Colors from '../../constants/Colors'
 import { TextInput } from 'react-native-gesture-handler';
 
 
 export default function ParameterInput(props) {
-    const [ value, setValue ] = useState('');
-    
-    useEffect(() => {
-        props.parentRef.current = value;
-    }, [value]);
-
-    useEffect(() => {
-        setValue(props.valueInput);
-    }, [props.valueInput])
-
+    const {value, setValue, disable} = props;
     return(
-        <View style={styles.inputContainer}>
+        <View style={[styles.inputContainer, { backgroundColor: disable ? Colors.disable : Colors.white }]}>
             <Text style={styles.label}>{props.labelInput}</Text>
-            <TextInput style={styles.input} placeholder="Insérer le texte ici" value={value} onChangeText={value => setValue(value)} />
+            <TextInput 
+                style={styles.input}  
+                placeholder="Insérer le texte ici" 
+                value={value} 
+                onChangeText={(text) => {setValue(text);}} 
+                editable={!disable}
+            />
         </View>
     )
 }

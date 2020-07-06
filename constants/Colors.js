@@ -7,4 +7,5 @@ export default {
   borderColor: '#CCC',
   shadowColor: "#111",
   black: "#000",
+  disable: '#DDD',
 };
