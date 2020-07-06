@@ -6,9 +6,15 @@ import ParameterInput from '../components/SettingsScreen/ParameterInput';
 import ParameterMap from '../components/SettingsScreen/ParameterMap';
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-function saveData(datas) {
+async function saveData(datas, firstLauch) {
     for(const prop in datas){
-        AsyncStorage.setItem(prop, JSON.stringify(datas[prop]));
+        await AsyncStorage.setItem(prop, JSON.stringify(datas[prop]));
+    }
+    // Deblock the user one all the datas are not empty
+    if(firstLauch) {
+        if(datas.nom !== '' && datas.prenom !== '' && datas.localisation.adress !== '') {
+            firstLauch(false);
+        }
     }
 }
 
@@ -21,10 +27,13 @@ async function getData(inputValues) {
     return loadData;
 }
 
-export default  function SettingsScreen() {
+export default function SettingsScreen(props) {
     const [nom, setNom] = useState('');
     const [prenom, setPrenom]  = useState('');
     const [localisation, setLocalisation]  = useState({adress: ''});
+
+    // This prop refer the function to deblock the user if it the first launch
+    const {firstLauch} = props;
 
     // Init the state with the saved values
     useEffect(() => {(
@@ -47,9 +56,9 @@ export default  function SettingsScreen() {
             <TouchableOpacity 
                 style={styles.btn} 
                 activeOpacity={.7} 
-                onPress={() => { saveData({nom, prenom, localisation}); }}
+                onPress={() => { saveData({nom, prenom, localisation}, firstLauch); }}
             >
-                <Text style={styles.btnText}>Sauvegarder</Text>
+                <Text style={styles.btnText}>{(firstLauch) ? 'Terminer' : 'Sauvegarder'}</Text>
             </TouchableOpacity>
         </ScrollView>
     );

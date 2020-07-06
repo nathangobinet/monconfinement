@@ -1,11 +1,12 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View, AsyncStorage } from 'react-native';
 import * as TaskManager from 'expo-task-manager';
 import * as Location from 'expo-location';
 
 import useCachedResources from './hooks/useCachedResources';
+import Welcome from './components/Welcome'
 import HomeScreen from './screens/HomeScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import Colors from './constants/Colors';
@@ -13,9 +14,14 @@ import HeaderOptions from './constants/HeaderOptions'
 import ActivityScreen from './screens/ActivityScreen';
 
 const LOCATION_TASK_NAME = 'background-location-task';
-
 const Stack = createStackNavigator();
 
+// Return true if location var do not exist which means it is the first lauch
+async function isFirstLauch() {
+  return await AsyncStorage.getItem('localisation') === null;
+}
+
+// Start looking for location change 
 (async function startBackgroundLocation() {
   const { status } = await Location.requestPermissionsAsync();
   if (status === 'granted') {
@@ -31,34 +37,51 @@ const Stack = createStackNavigator();
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
+  const [firstLauch, setFirstLaunch] = React.useState('wait');
 
-  if (!isLoadingComplete) {
+  // When compononent did mount set isFirstLaunch state
+  React.useEffect(()=> {(
+    async() => {
+      const result = await isFirstLauch()
+      console.log('pouet', result);
+      setFirstLaunch(result);
+    }
+  )();}, []);
+  
+  if (!isLoadingComplete && firstLauch === 'wait') {
     return null;
   } else {
-    return (
-      <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen 
-              name="Sorties" 
-              component={HomeScreen}
-              options={ HeaderOptions }
-            />
-            <Stack.Screen 
-              name="Paramètres" 
-              component={SettingsScreen} 
-              options={ HeaderOptions } 
-            />
-            <Stack.Screen 
-              name="Activité" 
-              component={ActivityScreen} 
-              options={ HeaderOptions } 
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </View>
-    );
+    if(firstLauch) {
+      console.log('fr', firstLauch);
+      return (
+        <Welcome setFirstLaunch={setFirstLaunch}/>
+      );
+    } else {
+      return (
+        <View style={styles.container}>
+          {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
+          <NavigationContainer>
+            <Stack.Navigator>
+              <Stack.Screen 
+                name="Sorties" 
+                component={HomeScreen}
+                options={ HeaderOptions }
+              />
+              <Stack.Screen 
+                name="Paramètres" 
+                component={SettingsScreen} 
+                options={ HeaderOptions } 
+              />
+              <Stack.Screen 
+                name="Activité" 
+                component={ActivityScreen} 
+                options={ HeaderOptions } 
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </View>
+      );
+    }
   }
 }
 
