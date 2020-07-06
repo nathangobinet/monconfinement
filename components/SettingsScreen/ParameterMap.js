@@ -1,7 +1,7 @@
 import { View, Dimensions, StyleSheet, Image, Text, ActivityIndicator } from "react-native";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import MapView from 'react-native-maps'
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Colors from '../../constants/Colors';
 import * as Location from 'expo-location';
 
@@ -44,16 +44,6 @@ async function handleLocate(setMapDisplay, setpreviewDisplay, setMapRegion, setA
   console.log(location);
   setValue(location);
 }
-
-/**
- * C'est globalement bien dégueu la facon dont tous les états sont générés
- * On a un seul etat maitre la haut
- * Les sous composant update leur état local dès que cet etat change (= triche ?)
- * Du coup c'est chiant de manipuler les états propre à chacun
- * A refaire au propre ?
- * Avec un état pour chacun ?
- * Et l'enfant modifie l'état du père ?
- */
 
 export default function ParameterMap(props) {
   const { setValue } = props;
