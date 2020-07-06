@@ -31,11 +31,25 @@ export default function ActivityScreen({ route, navigation}) {
         <ActivityTitle type={type} />
         
 			</View>
-      <View>
-        <Text>Description : {getOverallInfo(type).desc}</Text>
-        <Text>Informations Supplémentaires : {getOverallInfo(type).infoSupp}</Text>
-        <Text>Renseignements nécessaires : {getOverallInfo(type).need}</Text>
-      </View>
+      
+      <View style={styles.textContainer}>
+				<Text style={styles.title}>{getOverallInfo(type).titre}</Text>
+				<View style={styles.orangeLine}></View>
+				<Text style={styles.description}>{desc}</Text>
+			</View>
+
+      <View style={styles.textContainer}>
+				<Text style={styles.title}>Informations supplémentaires</Text>
+				<View style={styles.orangeLine}></View>
+				<Text style={styles.description}>{getOverallInfo(type).infoSupp}</Text>
+			</View>
+
+      <View style={styles.textContainer}>
+				<Text style={styles.title}>Renseignements nécessaires</Text>
+				<View style={styles.orangeLine}></View>
+				<Text style={styles.description}>{getOverallInfo(type).need}</Text>
+			</View>
+
     </View>
   );
 }
@@ -58,5 +72,25 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 10
   },
+
+  orangeLine: {
+		borderBottomColor: Colors.primary,
+		borderBottomWidth: 2,
+		height: 1,
+		marginBottom: 5,
+    width: 75,
+	},
+
+	textContainer: {
+    marginBottom: 5,
+    marginTop: 20,
+    paddingLeft: 30,
+    paddingRight: 30,
+	},
+
+	title : {
+		fontSize: 20,
+		marginBottom: 5
+	}
 
 });
