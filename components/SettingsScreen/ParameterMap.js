@@ -25,7 +25,7 @@ async function locationGranted() {
 
 async function getLocation(setAnimation) {
   setAnimation(true);
-  return await Location.getCurrentPositionAsync({});
+  return await Location.getCurrentPositionAsync({accuracy: Location.Accuracy.High});
 }
 
 async function setUpMapLocation(location, setMapRegion, setAnimation) {

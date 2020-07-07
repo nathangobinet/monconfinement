@@ -10,11 +10,12 @@ import SettingsScreen from './screens/SettingsScreen';
 import Colors from './constants/Colors';
 import HeaderOptions from './constants/HeaderOptions'
 import ActivityScreen from './screens/ActivityScreen'
-import { defineGeofencingTask } from './hooks/geofencing';
+import { defineGeofencingTask } from './hooks/geofencing'
 
 const Stack = createStackNavigator();
 
 defineGeofencingTask();
+
 
 // Return true if location var do not exist which means it is the first lauch
 async function isFirstLauch() {
