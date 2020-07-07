@@ -4,18 +4,25 @@ import Colors from '../constants/Colors';
 
 import ParameterInput from '../components/SettingsScreen/ParameterInput';
 import ParameterMap from '../components/SettingsScreen/ParameterMap';
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { geofenceLocalisation } from '../hooks/geofencing';
 
-async function saveData(datas, firstLauch) {
-    for(const prop in datas){
-        await AsyncStorage.setItem(prop, JSON.stringify(datas[prop]));
-    }
-    // Deblock the user one all the datas are not empty
+
+// Deblock the user one all the datas are not empty
+function deblockUserFirstLauch(firstLauch, datas) {
     if(firstLauch) {
         if(datas.nom !== '' && datas.prenom !== '' && datas.localisation.adress !== '') {
             firstLauch(false);
         }
     }
+}
+
+async function saveData(datas, firstLauch) {
+    for(const prop in datas){
+        await AsyncStorage.setItem(prop, JSON.stringify(datas[prop]));
+    }
+    deblockUserFirstLauch(firstLauch, datas);
+    geofenceLocalisation(datas.localisation);
 }
 
 async function getData(inputValues) {

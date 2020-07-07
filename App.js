@@ -2,8 +2,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 import { Platform, StatusBar, StyleSheet, View, AsyncStorage } from 'react-native';
-import * as TaskManager from 'expo-task-manager';
-import * as Location from 'expo-location';
 
 import useCachedResources from './hooks/useCachedResources';
 import Welcome from './components/Welcome'
@@ -11,29 +9,17 @@ import HomeScreen from './screens/HomeScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import Colors from './constants/Colors';
 import HeaderOptions from './constants/HeaderOptions'
-import ActivityScreen from './screens/ActivityScreen';
+import ActivityScreen from './screens/ActivityScreen'
+import { defineGeofencingTask } from './hooks/geofencing';
 
-const LOCATION_TASK_NAME = 'background-location-task';
 const Stack = createStackNavigator();
+
+defineGeofencingTask();
 
 // Return true if location var do not exist which means it is the first lauch
 async function isFirstLauch() {
   return await AsyncStorage.getItem('localisation') === null;
 }
-
-// Start looking for location change 
-(async function startBackgroundLocation() {
-  const { status } = await Location.requestPermissionsAsync();
-  if (status === 'granted') {
-    try {
-      await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
-        accuracy: Location.Accuracy.Balanced,
-      });
-    } catch(Error) {
-      console.log("Device does not support Async Update Location");
-    }
-  }
-})();
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -43,7 +29,6 @@ export default function App() {
   React.useEffect(()=> {(
     async() => {
       const result = await isFirstLauch()
-      console.log('pouet', result);
       setFirstLaunch(result);
     }
   )();}, []);
@@ -52,7 +37,6 @@ export default function App() {
     return null;
   } else {
     if(firstLauch) {
-      console.log('fr', firstLauch);
       return (
         <Welcome setFirstLaunch={setFirstLaunch}/>
       );
@@ -91,17 +75,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-/* Try to set up location detection */
-TaskManager.defineTask(LOCATION_TASK_NAME, async ({ data, error }) => {
-  if (error) {
-    console.log('Error', error)
-    return;
-  }
-  if (data) {
-    // const { locations } = data;
-    // const adress = await Location.reverseGeocodeAsync(locations[0].coords);
-    console.log('Success');
-  }
-});
-/* Try to set up location detection */
