@@ -6,7 +6,7 @@ import Colors from '../constants/Colors';
 import ActivityInfo from '../constants/listeActivite';
 import ParameterButton from '../components/ParameterButton';
 import ActivityTitle from '../components/ActivityScreen/ActivityTitle';
-
+import ActivityTimer from '../components/ActivityScreen/ActivityTimer';
 
 export default function ActivityScreen({ route, navigation}) {
 
@@ -49,6 +49,8 @@ export default function ActivityScreen({ route, navigation}) {
 				<View style={styles.orangeLine}></View>
 				<Text style={styles.description}>{getOverallInfo(type).need}</Text>
 			</View>
+      
+      <ActivityTimer />
 
     </View>
   );
