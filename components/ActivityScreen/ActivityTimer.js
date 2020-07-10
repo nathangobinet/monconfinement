@@ -36,7 +36,7 @@ function Timer() {
       <TouchableOpacity onPress={() => setTimerStarted(false)}>
         <CountdownCircleTimer
             onComplete={() => {
-                alert('LET\'S GO')
+                alert('Entrainement terminé !')
             }}
             isPlaying='true'
             duration={3600}
