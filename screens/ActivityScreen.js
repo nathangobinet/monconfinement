@@ -8,6 +8,15 @@ import ParameterButton from '../components/ParameterButton';
 import ActivityTitle from '../components/ActivityScreen/ActivityTitle';
 import ActivityTimer from '../components/ActivityScreen/ActivityTimer';
 
+function justifRequired(props){
+  if (props == 1)
+      return <ActivityTimer />;
+  else if (props == 2)
+    return <Text>Justification pas encore implémenté</Text>;
+  else
+    return <Text>Justification pas encore implémenté</Text>;
+}
+
 export default function ActivityScreen({ route, navigation}) {
 
   const { titre, img, desc, type } = route.params;
@@ -49,8 +58,8 @@ export default function ActivityScreen({ route, navigation}) {
 				<View style={styles.orangeLine}></View>
 				<Text style={styles.description}>{getOverallInfo(type).need}</Text>
 			</View>
-      
-      <ActivityTimer />
+
+      {justifRequired(type)}
 
     </View>
   );

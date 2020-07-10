@@ -1,39 +1,67 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import Colors from '../../constants/Colors';
-import CountDown from 'react-native-countdown-component';
+import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
-let pauseResume = {"running":"false"};
+const getTimeMinutes = time => ((time % 3600) / 60) | 0;
 
+const renderTime = (dimension, minute) => {
+    return (
+        <View style={styles.countdownWrapper}>
+            <Text
+                style={styles.remainingTime}>
+                {minute} min.
+            </Text>
+            <Text style={styles.dimension}>{dimension}</Text>
+        </View>
+    );
+};
 
 export default function ActivityTimer() {
-    return (
-    <View>
-        <CountDown
-        style={styles.container}
-        until={3599}
-        digitStyle={{backgroundColor: Colors.primary}}
-        digitTxtStyle={{color: Colors.white}}
-        onFinish={() => alert('finished')}
-        onPress={() => alert('Bruh')}
-        size={25}
-        timeToShow={['M', 'S']}
-        timeLabels={{m: null, s: null}}
-        showSeparator
-        separatorStyle={{color: Colors.white}}
-        {...pauseResume}
-        />
+  return (
+    <View style={styles.container}>
+        <CountdownCircleTimer
+            onComplete={() => {
+                alert('LET\'S GO')
+            }}
+            isPlaying
+            duration={3600}
+            colors={[[Colors.primary]]}
+        >
+            {
+                ({ elapsedTime }) => renderTime(
+                    "Bonne séance !",
+                    getTimeMinutes(3600 - elapsedTime / 1000),
+                )
+            }
+        </CountdownCircleTimer>
     </View>
-    );
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: Colors.primary,
-        borderRadius: 50,
-        marginLeft: 100,
-        marginRight: 100,
-        marginTop: 50,
-    },
-  });
-  
+  container: {
+    alignItems: 'center',
+    borderRadius: 50,
+    flex: 1,
+    justifyContent: 'center',
+    marginLeft: 100,
+    marginRight: 100,
+  },
+
+  countdownWrapper: {
+    alignItems: 'center',
+    borderRadius: 50,
+    justifyContent: 'center',
+  },
+
+  dimension: {
+    color: Colors.primary,
+    fontWeight: 'bold',
+  },
+
+  remainingTime: {
+    color: Colors.primary,
+    fontSize: 44,
+  },
+});
