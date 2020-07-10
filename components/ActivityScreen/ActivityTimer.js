@@ -2,10 +2,11 @@ import React, {useState} from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import Colors from '../../constants/Colors';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const getTimeMinutes = time => ((time % 3600) / 60) | 0;
 
-const renderTime = (dimension, minute) => {
+const TimeLabel = (dimension, minute) => {
     return (
         <View style={styles.countdownWrapper}>
             <Text
@@ -17,45 +18,46 @@ const renderTime = (dimension, minute) => {
     );
 };
 
-const start = () => {
-  return (
-    <View style={styles.countdownWrapper}>
+
+function Timer() {
+  const [timerStarted, setTimerStarted] = useState(false);
+
+  if(!timerStarted) {
+    return (
+      <TouchableOpacity style={styles.startBtnWrapper} onPress={() => setTimerStarted(true)}>
         <Text
-            style={styles.remainingTime}>
+            style={styles.startLbl}>
             Start
         </Text>
-    </View>
-  );
-}
-
-const [timerStarted, setTimerStarted] = useState(false);
-
-function renderTimer() {
-  if(!timerStarted) {
-    return <Text>HHOOOOW</Text>
+      </TouchableOpacity>
+    )
   } else {
-    return (<CountdownCircleTimer
-                onComplete={() => {
-                    alert('LET\'S GO')
-                }}
-
-                duration={3600}
-                colors={[[Colors.primary]]}
-            >
-                {
-                    ({ elapsedTime }) => renderTime(
-                        "Bonne séance !",
-                        getTimeMinutes(3600 - elapsedTime / 1000),
-                    )
-                }
-            </CountdownCircleTimer>);
+    return (
+      <TouchableOpacity onPress={() => setTimerStarted(false)}>
+        <CountdownCircleTimer
+            onComplete={() => {
+                alert('LET\'S GO')
+            }}
+            isPlaying='true'
+            duration={3600}
+            colors={[[Colors.primary]]}
+        >
+            {
+                ({ elapsedTime }) => TimeLabel(
+                    "Bonne séance !",
+                    getTimeMinutes(3600 - elapsedTime / 1000),
+                )
+            }
+        </CountdownCircleTimer>
+      </TouchableOpacity>
+    );
   }
 }
 
 export default function ActivityTimer() {
   return (
     <View style={styles.container}>
-        {renderTimer()}
+        <Timer />
     </View>
   );
 }
@@ -83,6 +85,21 @@ const styles = StyleSheet.create({
 
   remainingTime: {
     color: Colors.primary,
+    fontSize: 44,
+  },
+
+  startBtnWrapper: {
+    alignItems: 'center',
+    backgroundColor: Colors.primary,
+    borderRadius: 80,
+    color: Colors.white,
+    height: 160,
+    justifyContent: 'center',
+    width: 160,
+  },
+
+  startLbl: {
+    color: Colors.white,
     fontSize: 44,
   },
 });
