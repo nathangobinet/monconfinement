@@ -67,7 +67,8 @@ class Activity {
 
   start() {
     console.log('start');
-    this.setStarted(true);
+    alertAndNotifiate('L\'activité à commencer !', 'L\'activité à commencer + ext info');
+    this._started = true;
     this._timestamp = Date.now();
     return true;
   }
@@ -89,17 +90,16 @@ class Activity {
   }
 
   isOutside(){
-    return this._started;
+    return this._isOutside;
   }
 
   handleGoOutside() {
     // L'utilisateur sort de sa zone de confinement alors qu'il a commencé une activité 
-    if(this.isSetUp()) {
+    if(this.isSetUp() && !this.isStarted()) {
       this.start();
-      alertAndNotifiate('L\'activité à commencer !', 'L\'activité à commencer + ext info');
     } 
     // L'uitilisateur sort de sa zone de confinement alors qu'il n'a pas commencé une activité 
-    else {
+    else if(!this.isStarted()){
       alertAndNotifiate(
         'Sortie non authorisée', 
         'Attention, vous sortez de votre zone de confinement. Merci de regagner votre zone deconfinement ou de commencer une activité.',
@@ -129,6 +129,7 @@ class Activity {
 
   handlePositionChange(state) {
     this._isOutside =  (state === 2);
+    console.log('isStarted', this.isStarted(), 'isSetUp', this.isSetUp());
     (this.isOutside()) ? this.handleGoOutside() : this.handleGoInside();
   }
 }
