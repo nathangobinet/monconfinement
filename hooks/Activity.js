@@ -10,6 +10,10 @@ class Activity {
     return this._started;
   }
 
+  isSetUp(){
+    return this._currentActivity !== null;
+  }
+
   decreaseCount(){
     if (this._activityCout === 0 ) return false;
     this._activityCout -= 1;

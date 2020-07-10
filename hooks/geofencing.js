@@ -6,10 +6,9 @@ import { Alert } from 'react-native';
 
 import Activity from './Activity';
 
-const RADIUS_METTERS = 20;
+const RADIUS_METTERS = 15;
 const GEOFENCING_TASK_NAME = 'geofencing-task';
 
-export let isOutside = false;
 
 export async function geofenceLocalisation(localisation){
   const regions = [{
@@ -17,9 +16,7 @@ export async function geofenceLocalisation(localisation){
     longitude: localisation.coords.longitude,
     radius: RADIUS_METTERS,
   }];
-  if(await TaskManager.isTaskRegisteredAsync(GEOFENCING_TASK_NAME)) {
-    await TaskManager.unregisterAllTasksAsync();
-  }
+  await TaskManager.unregisterAllTasksAsync();
   Location.startGeofencingAsync(GEOFENCING_TASK_NAME, regions);
 }
 
@@ -77,9 +74,8 @@ function handleRegionChange(region) {
   (region.state === 2) ? handleGoOutside() : handleGoInside();
 }
 
-export function defineGeofencingTask() {
+export async function defineGeofencingTask() {
   TaskManager.defineTask(GEOFENCING_TASK_NAME, async ({ data: {  region } }) => {
-    console.log('hry');
     handleRegionChange(region);
   });
 }
