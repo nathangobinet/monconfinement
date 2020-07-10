@@ -1,6 +1,8 @@
+/* eslint-disable react/no-children-prop */
 import { View, Dimensions, StyleSheet, Image, Text, ActivityIndicator } from "react-native";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import MapView from 'react-native-maps'
+import { Circle } from 'react-native-maps'
 import React, { useState } from 'react';
 import Colors from '../../constants/Colors';
 import * as Location from 'expo-location';
@@ -33,10 +35,11 @@ async function setUpMapLocation(location, setMapRegion, setAnimation) {
   setAnimation(false);
 }
 
-async function handleLocate(setMapDisplay, setpreviewDisplay, setMapRegion, setAnimation, setValue) {
+async function handleLocate(setMapDisplay, setpreviewDisplay, setMapRegion, setAnimation, setValue, setChildren) {
   if(!await locationGranted()) return;
   transitionViews(setMapDisplay, setpreviewDisplay);
   const location = await getLocation(setAnimation);
+  setChildren(<Circle center={location.coords} radius={20} fillColor="#bcd7f5" strokeColor="#4c97ed"/>)
   setUpMapLocation(location, setMapRegion, setAnimation);
   const [adressObject] = await Location.reverseGeocodeAsync(location.coords);
   const adressString = `${adressObject.name} ${adressObject.street}`;
@@ -50,20 +53,24 @@ export default function ParameterMap(props) {
   const [previewDisplay, setpreviewDisplay] = useState({display: 'flex'});
   const [mapRegion, setMapRegion] = useState(defaultRegion);
   const [animation, setAnimation] = useState(false);
+  const [children, setChildren] = useState(null);
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity activeOpacity={.8} onPress={() => handleLocate(setMapDisplay, setpreviewDisplay, setMapRegion, setAnimation, setValue)}>
+      <TouchableOpacity activeOpacity={.8} onPress={() => handleLocate(setMapDisplay, setpreviewDisplay, setMapRegion, setAnimation, setValue, setChildren)}>
         <Image source={imagePreview} style={[styles.imageStyle, previewDisplay]}/>
         <Text style={styles.buttonStyle}>Me localiser</Text>
       </TouchableOpacity>
-      <MapView style={[styles.mapStyle, mapDisplay]} region={mapRegion}/>
+      <MapView style={[styles.mapStyle, mapDisplay]} region={mapRegion} children={children}>
+      </MapView>
       <View style={styles.acitivityView}>
         <ActivityIndicator size="large" color={Colors.primary} hidesWhenStopped={true} animating={animation} />
       </View>
     </View>
   ); 
 }
+
+const {width} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   acitivityView: {
@@ -81,17 +88,16 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     backgroundColor: Colors.white,
-    flex: 1,
     justifyContent: 'center',
     marginBottom: 10,
     position: "relative",
   },
   imageStyle: {
     height: 300,
-    width: Dimensions.get('window').width,
+    width,
   },
   mapStyle: {
     height: 300,
-    width: Dimensions.get('window').width,
+    width,
   },
 });
