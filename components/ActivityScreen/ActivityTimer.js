@@ -3,6 +3,7 @@ import { Text, View, StyleSheet } from 'react-native';
 import Colors from '../../constants/Colors';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import Activity from '../../hooks/Activity'
 
 const getTimeMinutes = time => ((time % 3600) / 60) | 0;
 
@@ -18,13 +19,21 @@ const TimeLabel = (dimension, minute) => {
     );
 };
 
+function startActivity(type, setTimerStarted) {
+  Activity.begin(type);
+  setTimerStarted(true);
+}
 
-function Timer() {
-  const [timerStarted, setTimerStarted] = useState(false);
+function Timer(props) {
+
+  const [timerStarted, setTimerStarted] = useState(Activity.isStarted());
 
   if(!timerStarted) {
     return (
-      <TouchableOpacity style={styles.startBtnWrapper} onPress={() => setTimerStarted(true)}>
+      <TouchableOpacity 
+        style={styles.startBtnWrapper} 
+        onPress={() => startActivity(props.type, setTimerStarted)}
+      >
         <Text
             style={styles.startLbl}>
             Start
@@ -33,23 +42,21 @@ function Timer() {
     )
   } else {
     return (
-      <TouchableOpacity onPress={() => setTimerStarted(false)}>
-        <CountdownCircleTimer
-            onComplete={() => {
-                alert('Entrainement terminé !')
-            }}
-            isPlaying='true'
-            duration={3600}
-            colors={[[Colors.primary]]}
-        >
-            {
-                ({ elapsedTime }) => TimeLabel(
-                    "Bonne séance !",
-                    getTimeMinutes(3600 - elapsedTime / 1000),
-                )
-            }
-        </CountdownCircleTimer>
-      </TouchableOpacity>
+      <CountdownCircleTimer
+          onComplete={() => {
+              alert('Entrainement terminé !')
+          }}
+          isPlaying='true'
+          duration={3600}
+          colors={[[Colors.primary]]}
+      >
+          {
+              ({ elapsedTime }) => TimeLabel(
+                  "Bonne séance !",
+                  getTimeMinutes(3600 - elapsedTime / 1000),
+              )
+          }
+      </CountdownCircleTimer>
     );
   }
 }
@@ -85,7 +92,7 @@ const styles = StyleSheet.create({
 
   remainingTime: {
     color: Colors.primary,
-    fontSize: 44,
+    fontSize: 32,
   },
 
   startBtnWrapper: {
