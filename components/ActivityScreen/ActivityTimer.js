@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import Colors from '../../constants/Colors';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
@@ -17,24 +17,45 @@ const renderTime = (dimension, minute) => {
     );
 };
 
+const start = () => {
+  return (
+    <View style={styles.countdownWrapper}>
+        <Text
+            style={styles.remainingTime}>
+            Start
+        </Text>
+    </View>
+  );
+}
+
+const [timerStarted, setTimerStarted] = useState(false);
+
+function renderTimer() {
+  if(!timerStarted) {
+    return <Text>HHOOOOW</Text>
+  } else {
+    return (<CountdownCircleTimer
+                onComplete={() => {
+                    alert('LET\'S GO')
+                }}
+
+                duration={3600}
+                colors={[[Colors.primary]]}
+            >
+                {
+                    ({ elapsedTime }) => renderTime(
+                        "Bonne séance !",
+                        getTimeMinutes(3600 - elapsedTime / 1000),
+                    )
+                }
+            </CountdownCircleTimer>);
+  }
+}
+
 export default function ActivityTimer() {
   return (
     <View style={styles.container}>
-        <CountdownCircleTimer
-            onComplete={() => {
-                alert('LET\'S GO')
-            }}
-            isPlaying
-            duration={3600}
-            colors={[[Colors.primary]]}
-        >
-            {
-                ({ elapsedTime }) => renderTime(
-                    "Bonne séance !",
-                    getTimeMinutes(3600 - elapsedTime / 1000),
-                )
-            }
-        </CountdownCircleTimer>
+        {renderTimer()}
     </View>
   );
 }
