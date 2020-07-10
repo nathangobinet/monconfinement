@@ -1,12 +1,15 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, Text} from 'react-native';
 
 import Colors from '../../constants/Colors';
+import Activity from '../../hooks/Activity';
 
 export default function ActivityTitle() {
+    const [count, setCount] = useState(Activity.getCount());
+    Activity.setSetCount(setCount);
     return(
         <View style={styles.circle}>
-            <Text style={styles.count}>3</Text>
+            <Text style={styles.count}>{count}</Text>
         </View>
     )
 }

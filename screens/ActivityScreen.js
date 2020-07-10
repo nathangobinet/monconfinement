@@ -11,7 +11,7 @@ import ActivityTimer from '../components/ActivityScreen/ActivityTimer';
 function justifRequired(type){
   switch(type) {
     case 1: 
-      return <ActivityTimer type={type} />;
+      return <ActivityTimer />;
     default: 
       return <Text>Justification pas encore implémenté</Text>;
   }
