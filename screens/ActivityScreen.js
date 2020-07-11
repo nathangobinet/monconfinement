@@ -8,7 +8,7 @@ import ParameterButton from '../components/ParameterButton';
 import ActivityTitle from '../components/ActivityScreen/ActivityTitle';
 import ActivityTimer from '../components/ActivityScreen/ActivityTimer';
 
-function justifRequired(type){
+function JustifRequired({ type }){
   switch(type) {
     case 1: 
       return <ActivityTimer />;
@@ -57,7 +57,7 @@ export default function ActivityScreen({ route, navigation}) {
 				<Text style={styles.description}>{getOverallInfo(type).need}</Text>
 			</View>
 
-      <justifRequired type={type} />
+      <JustifRequired type={type} />
 
     </View>
   );

@@ -5,8 +5,7 @@ import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Activity, { state } from '../../hooks/Activity'
 
-const maxTime = 60;
-const getTimeMinutes = time => ((time % 3600) / maxTime) | 0;
+const getTimeMinutes = time => ((time % 3600) / 60) | 0;
 
 const TimeLabel = (dimension, minute) => {
     return (
@@ -24,15 +23,23 @@ function startActivity(setTimerState, maxTime) {
   Activity.begin(setTimerState, maxTime);
 }
 
+function getRemaningSeconds() {
+  console.log(Activity.getRemainingSeconds());
+  return Activity.getRemainingSeconds();
+}
+
 function Timer() {
 
   const [timerState, setTimerState] = useState(Activity.getState());
+  const [remainingSeconds] = useState(getRemaningSeconds());
+
+  console.log(timerState);
 
   if(timerState === state.STOP) {
     return (
       <TouchableOpacity 
         style={styles.startBtnWrapper} 
-        onPress={() => startActivity(setTimerState, maxTime)}
+        onPress={() => startActivity(setTimerState, 60*60)}
       >
         <Text
             style={styles.startLbl}>
@@ -54,9 +61,6 @@ function Timer() {
   } else {
     return (
       <CountdownCircleTimer
-          onComplete={() => {
-              alert('Entrainement terminé !')
-          }}
           isPlaying='true'
           duration={3600}
           colors={[[Colors.primary]]}
@@ -64,7 +68,7 @@ function Timer() {
           {
               ({ elapsedTime }) => TimeLabel(
                   "Bonne séance !",
-                  getTimeMinutes(3600 - elapsedTime / 1000),
+                  getTimeMinutes(remainingSeconds - elapsedTime / 1000),
               )
           }
       </CountdownCircleTimer>
