@@ -34,7 +34,8 @@
         "UIBackgroundModes": [
           "location"
         ]
-      }
+      },
+      "usesIcloudStorage": true
     },
     "web": {
       "favicon": "./assets/images/favicon.png"

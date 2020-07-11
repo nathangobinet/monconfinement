@@ -7,13 +7,17 @@ import ActivityInfo from '../constants/listeActivite';
 import ParameterButton from '../components/ParameterButton';
 import ActivityTitle from '../components/ActivityScreen/ActivityTitle';
 import ActivityTimer from '../components/ActivityScreen/ActivityTimer';
+import ActivityAttachement from '../components/ActivityScreen/ActivityAttachement';
 
-function justifRequired(type){
-  switch(type) {
-    case 1: 
-      return <ActivityTimer />;
-    default: 
-      return <Text>Justification pas encore implémenté</Text>;
+
+function JustifRequired(type){
+    switch(type.type) {
+      case 1: 
+        return <ActivityTimer />;
+      case 3:
+        return <ActivityAttachement />;
+      default: 
+    return <Text>Justification pas encore implémenté</Text>;
   }
 }
 
@@ -57,7 +61,7 @@ export default function ActivityScreen({ route, navigation}) {
 				<Text style={styles.description}>{getOverallInfo(type).need}</Text>
 			</View>
 
-      <justifRequired type={type} />
+      <JustifRequired type={type} />
 
     </View>
   );
