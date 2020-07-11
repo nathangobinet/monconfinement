@@ -25,15 +25,20 @@ export const state = Object.freeze({ STOP: 1,  SETUP: 2,  STARTED: 3 });
 class Activity {
   constructor(){
     this._isOutside = null;
-    this._activityCount = 3;
+    this._activityCount = 5;
     this._state = state.STOP;
     this._timestamp = null;
+    this._type = null;
     this._currentSetState = null;
     this._setCount = null;
     this._maxTime = null;
   }
 
-  isSetUp(){
+  isCurrent(type) {
+    return this._type === type;
+  }
+
+  isSetUp() {
     return this._state === state.SETUP;
   }
 
@@ -47,7 +52,7 @@ class Activity {
 
   setState(state) {
     this._state = state;
-    this._currentSetState(state);
+    if(this._currentSetState !== null) this._currentSetState(state);
   }
 
   getCount() {
@@ -60,11 +65,17 @@ class Activity {
   }
 
   getRemainingSeconds() {
+    console.log('Remaining Seconds', this._maxTime - this.getSecondsSinceItStarted());
     return this._maxTime - this.getSecondsSinceItStarted();
   }
 
   setSetCount(setCount) {
     this._setCount = setCount;
+  }
+
+  setSetState(setState) {
+    console.log(setState);
+    this._currentSetState = setState;
   }
 
   decreaseCount(){
@@ -78,7 +89,7 @@ class Activity {
     return this._activityCount;
   }
 
-  setUp(setState, maxTime) {
+  setUp(setState, type, maxTime) {
     if(this.isStarted()) {
       errorAlert('Une activité est déjà en cours'); 
       return false;
@@ -89,6 +100,7 @@ class Activity {
     }
     console.log('set up');
     this._currentSetState = setState;
+    this._type = type;
     this.setState(state.SETUP);
     this._maxTime = maxTime;
     return true;
@@ -97,24 +109,23 @@ class Activity {
   start() {
     console.log('start');
     this.decreaseCount();
-    alertAndNotifiate('L\'activité à commencer !', 'L\'activité à commencer + ext info');
-    this.setState(state.STARTED);
+    alertAndNotifiate('L\'activité à commencer !', 'L\'activité a commencée');
     this._timestamp = Date.now();
-    return true;
+    this.setState(state.STARTED);
   }
 
   stop() {
     console.log('stop');
-    this._timestamp = null;
-    this._currentActivity = null;
     this.setState(state.STOP);
+    this._timestamp = null;
+    this._type = null;
   }
 
-  begin(setState, maxTime = null) {
+  begin(setState, type, maxTime = null) {
     if(this.isOutside()) {
-      if(this.setUp(setState, maxTime)) this.start();
+      if(this.setUp(setState, type, maxTime)) this.start();
     } else {
-      this.setUp(setState, maxTime);
+      this.setUp(setState, type, maxTime);
     }
   }
 

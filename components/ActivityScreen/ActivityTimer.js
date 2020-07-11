@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import Colors from '../../constants/Colors';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Activity, { state } from '../../hooks/Activity'
 
+const activityType = 1;
+const durationInSeconds = 3600;
 const getTimeMinutes = time => ((time % 3600) / 60) | 0;
 
 const TimeLabel = (dimension, minute) => {
@@ -19,27 +21,39 @@ const TimeLabel = (dimension, minute) => {
     );
 };
 
-function startActivity(setTimerState, maxTime) {
-  Activity.begin(setTimerState, maxTime);
+function getRemaningSeconds() {
+  const remaining = Activity.getRemainingSeconds();
+  // Correct ?
+  if(remaining === 0) return durationInSeconds;
+  return remaining;
 }
 
-function getRemaningSeconds() {
-  console.log(Activity.getRemainingSeconds());
-  return Activity.getRemainingSeconds();
+function getState() {
+  if(!Activity.isCurrent(activityType)) return state.STOP;
+  return Activity.getState();
 }
 
 function Timer() {
 
-  const [timerState, setTimerState] = useState(Activity.getState());
+  const [timerState, setTimerState] = useState(getState());
   const [remainingSeconds] = useState(getRemaningSeconds());
 
-  console.log(timerState);
+  useEffect(() => {
+    if(Activity.isCurrent(activityType)) {
+      Activity.setSetState(setTimerState);
+      return () => { Activity.setSetState(null); };
+    }
+  }, []);
+
+  // Debug
+  console.log(setTimerState, Activity._currentSetState, setTimerState ===  Activity._currentSetState);
+  console.log('component remainingSeconds', remainingSeconds);
 
   if(timerState === state.STOP) {
     return (
       <TouchableOpacity 
         style={styles.startBtnWrapper} 
-        onPress={() => startActivity(setTimerState, 60*60)}
+        onPress={() => {Activity.begin(setTimerState, activityType, durationInSeconds); }}
       >
         <Text
             style={styles.startLbl}>
@@ -62,13 +76,14 @@ function Timer() {
     return (
       <CountdownCircleTimer
           isPlaying='true'
-          duration={3600}
+          duration={durationInSeconds}
+          initialRemainingTime={remainingSeconds}
           colors={[[Colors.primary]]}
       >
           {
               ({ elapsedTime }) => TimeLabel(
                   "Bonne séance !",
-                  getTimeMinutes(remainingSeconds - elapsedTime / 1000),
+                  getTimeMinutes(durationInSeconds - elapsedTime / 1000),
               )
           }
       </CountdownCircleTimer>
