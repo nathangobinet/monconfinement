@@ -3,8 +3,10 @@ import { Text, View, StyleSheet } from 'react-native';
 import Colors from '../../constants/Colors';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import Activity, { state } from '../../hooks/Activity'
 
-const getTimeMinutes = time => ((time % 3600) / 60) | 0;
+const maxTime = 60;
+const getTimeMinutes = time => ((time % 3600) / maxTime) | 0;
 
 const TimeLabel = (dimension, minute) => {
     return (
@@ -18,38 +20,54 @@ const TimeLabel = (dimension, minute) => {
     );
 };
 
+function startActivity(setTimerState, maxTime) {
+  Activity.begin(setTimerState, maxTime);
+}
 
 function Timer() {
-  const [timerStarted, setTimerStarted] = useState(false);
 
-  if(!timerStarted) {
+  const [timerState, setTimerState] = useState(Activity.getState());
+
+  if(timerState === state.STOP) {
     return (
-      <TouchableOpacity style={styles.startBtnWrapper} onPress={() => setTimerStarted(true)}>
+      <TouchableOpacity 
+        style={styles.startBtnWrapper} 
+        onPress={() => startActivity(setTimerState, maxTime)}
+      >
         <Text
             style={styles.startLbl}>
-            Start
+            Démarrer
         </Text>
       </TouchableOpacity>
     )
+  } else if(timerState === state.SETUP) {
+    return (
+      <View 
+        style={styles.startBtnWrapper} 
+      >
+        <Text
+            style={styles.waitingLbl}>
+            En attente...
+        </Text>
+      </View>
+    )
   } else {
     return (
-      <TouchableOpacity onPress={() => setTimerStarted(false)}>
-        <CountdownCircleTimer
-            onComplete={() => {
-                alert('Entrainement terminé !')
-            }}
-            isPlaying='true'
-            duration={3600}
-            colors={[[Colors.primary]]}
-        >
-            {
-                ({ elapsedTime }) => TimeLabel(
-                    "Bonne séance !",
-                    getTimeMinutes(3600 - elapsedTime / 1000),
-                )
-            }
-        </CountdownCircleTimer>
-      </TouchableOpacity>
+      <CountdownCircleTimer
+          onComplete={() => {
+              alert('Entrainement terminé !')
+          }}
+          isPlaying='true'
+          duration={3600}
+          colors={[[Colors.primary]]}
+      >
+          {
+              ({ elapsedTime }) => TimeLabel(
+                  "Bonne séance !",
+                  getTimeMinutes(3600 - elapsedTime / 1000),
+              )
+          }
+      </CountdownCircleTimer>
     );
   }
 }
@@ -85,7 +103,7 @@ const styles = StyleSheet.create({
 
   remainingTime: {
     color: Colors.primary,
-    fontSize: 44,
+    fontSize: 32,
   },
 
   startBtnWrapper: {
@@ -107,6 +125,11 @@ const styles = StyleSheet.create({
 
   startLbl: {
     color: Colors.white,
-    fontSize: 44,
+    fontSize: 30,
+  },
+
+  waitingLbl: {
+    color: Colors.white,
+    fontSize: 22,
   },
 });

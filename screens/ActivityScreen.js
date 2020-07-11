@@ -8,13 +8,13 @@ import ParameterButton from '../components/ParameterButton';
 import ActivityTitle from '../components/ActivityScreen/ActivityTitle';
 import ActivityTimer from '../components/ActivityScreen/ActivityTimer';
 
-function JustifRequired(props){
-  if (props.type == 1)
+function justifRequired(type){
+  switch(type) {
+    case 1: 
       return <ActivityTimer />;
-  else if (props.type == 2)
-    return <Text>AJOUTER LA MAP DES MAGASINS (bon courage Nathan.G)</Text>;
-  else
-    return <Text>AJOUTER PIECE JUSTIFICATIVE</Text>;
+    default: 
+      return <Text>Justification pas encore implémenté</Text>;
+  }
 }
 
 export default function ActivityScreen({ route, navigation}) {
@@ -36,9 +36,7 @@ export default function ActivityScreen({ route, navigation}) {
           style={styles.activityImage}
 					source={img}
 				/>
-
         <ActivityTitle type={type} />
-        
 			</View>
       
       <View style={styles.textContainer}>
@@ -59,7 +57,7 @@ export default function ActivityScreen({ route, navigation}) {
 				<Text style={styles.description}>{getOverallInfo(type).need}</Text>
 			</View>
 
-      <JustifRequired type={type} />
+      <justifRequired type={type} />
 
     </View>
   );
