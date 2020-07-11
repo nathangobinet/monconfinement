@@ -9,7 +9,6 @@ import ActivityTitle from '../components/ActivityScreen/ActivityTitle';
 import ActivityTimer from '../components/ActivityScreen/ActivityTimer';
 import ActivityAttachement from '../components/ActivityScreen/ActivityAttachement';
 
-
 function JustifRequired(type){
     switch(type.type) {
       case 1: 

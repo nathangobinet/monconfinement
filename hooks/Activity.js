@@ -28,7 +28,7 @@ class Activity {
     this._activityCount = 3;
     this._state = state.STOP;
     this._timestamp = null;
-    this._currentSetState= null;
+    this._currentSetState = null;
     this._setCount = null;
     this._maxTime = null;
   }
@@ -52,6 +52,15 @@ class Activity {
 
   getCount() {
     return this._activityCount;
+  }
+
+  getSecondsSinceItStarted() {
+    if(this._timestamp === null) return 0;
+    return (Date.now() - this._timestamp) / 1000;
+  }
+
+  getRemainingSeconds() {
+    return this._maxTime - this.getSecondsSinceItStarted();
   }
 
   setSetCount(setCount) {
