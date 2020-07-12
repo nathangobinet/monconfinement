@@ -20,13 +20,13 @@ function errorAlert(msg) {
   Alert.alert('Attention !', msg);
 }
 
-export const state = Object.freeze({ STOP: 1,  SETUP: 2,  STARTED: 3 });
+export const states = Object.freeze({ STOP: 1,  SETUP: 2,  STARTED: 3 });
 
 class Activity {
   constructor(){
     this._isOutside = null;
     this._activityCount = 5;
-    this._state = state.STOP;
+    this._state = states.STOP;
     this._timestamp = null;
     this._type = null;
     this._currentSetState = null;
@@ -39,11 +39,11 @@ class Activity {
   }
 
   isSetUp() {
-    return this._state === state.SETUP;
+    return this._state === states.SETUP;
   }
 
   isStarted() {
-    return this._state === state.STARTED;
+    return this._state === states.STARTED;
   }
 
   getState() {
@@ -101,7 +101,7 @@ class Activity {
     console.log('set up');
     this._currentSetState = setState;
     this._type = type;
-    this.setState(state.SETUP);
+    this.setState(states.SETUP);
     this._maxTime = maxTime;
     return true;
   }
@@ -111,12 +111,12 @@ class Activity {
     this.decreaseCount();
     alertAndNotifiate('L\'activité à commencer !', 'L\'activité a commencée');
     this._timestamp = Date.now();
-    this.setState(state.STARTED);
+    this.setState(states.STARTED);
   }
 
   stop() {
     console.log('stop');
-    this.setState(state.STOP);
+    this.setState(states.STOP);
     this._timestamp = null;
     this._type = null;
   }
