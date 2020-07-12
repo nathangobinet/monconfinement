@@ -7,14 +7,17 @@ import ActivityInfo from '../constants/listeActivite';
 import ParameterButton from '../components/ParameterButton';
 import ActivityTitle from '../components/ActivityScreen/ActivityTitle';
 import ActivityTimer from '../components/ActivityScreen/ActivityTimer';
+import ActivityStart from '../components/ActivityScreen/ActivityStart';
 import ActivityAttachement from '../components/ActivityScreen/ActivityAttachement';
 
-function JustifRequired(type){
-    switch(type.type) {
+function JustifRequired({ type }){
+    switch(type) {
       case 1: 
-        return <ActivityTimer />;
+        return <ActivityTimer type={type}/>;
+      case 2: 
+        return <ActivityStart type={type}/>
       case 3:
-        return <ActivityAttachement />;
+        return <ActivityAttachement type={type}/>;
       default: 
     return <Text>Justification pas encore implémenté</Text>;
   }
