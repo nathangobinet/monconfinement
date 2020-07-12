@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Alert } from 'react-native';
 import Activity, { states } from '../../hooks/Activity'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Colors from '../../constants/Colors';
@@ -23,13 +23,17 @@ function getTextWithState(state) {
 }
 
 function StartButton(props) {
-  const { state, setState, type } = props;
+  const { state, setState, type, ready } = props;
   const text = <Text style={styles.textBtn}>{getTextWithState(state)}</Text>
   if(state === states.STOP) {
     return (
     <TouchableOpacity 
-      style={styles.startBtnWrapper}
-      onPress={() => { Activity.begin(setState, type); }}
+      style={{...styles.startBtnWrapper, ...{backgroundColor: (ready) ? Colors.primary : Colors.disable }}}
+      onPress={
+        () => { (ready) 
+        ? Activity.begin(setState, type) 
+        : Alert.alert('Attention !', 'Des indications sont nécessaires avant de démarrer l\'actvité'); 
+      }}
     >
       {text}
     </TouchableOpacity>
@@ -43,7 +47,7 @@ function StartButton(props) {
   }
 }
 
-export default function ActivityStart({ type }) {
+export default function ActivityStart({ type, ready }) {
   const [state, setState] = useState(getState(type))
 
   useEffect(() => {
@@ -55,7 +59,7 @@ export default function ActivityStart({ type }) {
 
   return (
     <View style={styles.startContainer}>
-     <StartButton state={state} setState={setState} type={type}/>
+     <StartButton state={state} setState={setState} type={type} ready={ready} />
     </View>
   );
 }
@@ -81,9 +85,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 50,
     flex: 1,
-    justifyContent: 'center',
-    marginLeft: 100,
-    marginRight: 100,
+    marginBottom: 50,
+    marginTop: 50,
   }, textBtn: {
     color: Colors.white,
     fontSize: 22,

@@ -126,6 +126,8 @@ const styles = StyleSheet.create({
     color: Colors.white,
     height: 160,
     justifyContent: 'center',
+    marginBottom: 50,
+    marginTop: 50,
     shadowColor: Colors.shadowColor,
 		shadowOffset: {
 			width: 0,

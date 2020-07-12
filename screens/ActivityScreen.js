@@ -7,17 +7,18 @@ import ActivityInfo from '../constants/listeActivite';
 import ParameterButton from '../components/ParameterButton';
 import ActivityTitle from '../components/ActivityScreen/ActivityTitle';
 import ActivityTimer from '../components/ActivityScreen/ActivityTimer';
-import ActivityStart from '../components/ActivityScreen/ActivityStart';
 import ActivityAttachement from '../components/ActivityScreen/ActivityAttachement';
+import ActivityStores from '../components/ActivityScreen/ActivityStores';
+import { ScrollView } from 'react-native-gesture-handler';
 
 function JustifRequired({ type }){
     switch(type) {
       case 1: 
-        return <ActivityTimer type={type}/>;
+        return <ActivityTimer type={type} />;
       case 2: 
-        return <ActivityStart type={type}/>
+        return <ActivityStores type={type} />;
       case 3:
-        return <ActivityAttachement type={type}/>;
+        return <ActivityAttachement type={type} />;
       default: 
     return <Text>Justification pas encore implémenté</Text>;
   }
@@ -36,7 +37,7 @@ export default function ActivityScreen({ route, navigation}) {
   });
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View>
 				<Image
           style={styles.activityImage}
@@ -65,7 +66,7 @@ export default function ActivityScreen({ route, navigation}) {
 
       <JustifRequired type={type} />
 
-    </View>
+    </ScrollView>
   );
 }
 
