@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import Colors from '../../constants/Colors';
-import Activity, { states } from '../../hooks/Activity'
 import ActivityStart from './ActivityStart';
 import * as DocumentPicker from 'expo-document-picker';
 
@@ -12,7 +11,6 @@ export default function ActivityAttachement(props) {
         const doc = await DocumentPicker.getDocumentAsync({"type": "application/pdf"});
         if (doc.type === "success") {
             setDocState(doc);
-            console.log(docState);
         }
     }
     
@@ -30,14 +28,12 @@ export default function ActivityAttachement(props) {
             <ActivityStart type={props.type} ready={docState !== false} />
         </View>
     );
-    
 }
 
 const styles = StyleSheet.create({
     btn: {
         color: Colors.white,
     },
-
     btnSearchWrapper: {
         backgroundColor: Colors.primary,
         borderRadius: 10,
@@ -53,7 +49,6 @@ const styles = StyleSheet.create({
 		shadowOpacity: 0.22,
 		shadowRadius: 2.22,
     },
-
     container: {
         alignItems: 'center',
         borderRadius: 50,
@@ -61,5 +56,4 @@ const styles = StyleSheet.create({
         marginLeft: 100,
         marginRight: 100,
     },
-
 });

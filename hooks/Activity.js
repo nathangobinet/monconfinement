@@ -65,7 +65,6 @@ class Activity {
   }
 
   getRemainingSeconds() {
-    console.log('Remaining Seconds', this._maxTime - this.getSecondsSinceItStarted());
     return this._maxTime - this.getSecondsSinceItStarted();
   }
 
@@ -74,7 +73,6 @@ class Activity {
   }
 
   setSetState(setState) {
-    console.log(setState);
     this._currentSetState = setState;
   }
 
@@ -83,7 +81,6 @@ class Activity {
       errorAlert('Vous avez epuisé votre nombre maximale d\'activité'); 
       return false;
     }
-    console.log('dicrease');
     this._activityCount -= 1;
     this._setCount(this._activityCount);
     return this._activityCount;
@@ -98,7 +95,6 @@ class Activity {
       errorAlert('Vous avez epuisé votre nombre d\'activité'); 
       return false;
     }
-    console.log('set up');
     this._currentSetState = setState;
     this._type = type;
     this.setState(states.SETUP);
@@ -107,7 +103,6 @@ class Activity {
   }
 
   start() {
-    console.log('start');
     this.decreaseCount();
     alertAndNotifiate('L\'activité à commencer !', 'L\'activité a commencée');
     this._timestamp = Date.now();
@@ -115,7 +110,6 @@ class Activity {
   }
 
   stop() {
-    console.log('stop');
     this.setState(states.STOP);
     this._timestamp = null;
     this._type = null;
@@ -169,7 +163,6 @@ class Activity {
 
   handlePositionChange(state) {
     this._isOutside = (state === 2);
-    console.log('isStarted', this.isStarted(), 'isSetUp', this.isSetUp(), this._state, this.getCount());
     (this.isOutside()) ? this.handleGoOutside() : this.handleGoInside();
   }
 }
