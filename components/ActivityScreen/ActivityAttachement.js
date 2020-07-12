@@ -1,26 +1,30 @@
 import React, {useState} from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import Colors from '../../constants/Colors';
+import Activity, { states } from '../../hooks/Activity'
+import ActivityStart from './ActivityStart';
 import * as DocumentPicker from 'expo-document-picker';
-//import Pdf from 'react-native-pdf';
 
-export default function ActivityAttachement() {
+alert(Activity.getState() + " " + states.SETUP)
+
+export default function ActivityAttachement(props) {
     const [docState, setDocState] = useState(false);
 
     async function DocUrl() {
         const doc = await DocumentPicker.getDocumentAsync({"type": "application/pdf"});
         if (doc.type === "success") {
             setDocState(doc);
+            console.log(docState);
         }
     }
-
-    function PdfView() {
-        console.log(docState.uri);
-    }
     
-    return (
-        <View style={styles.container}>
-            <View style={styles.btnContainer}>
+    if(docState && Activity.getState() === states.SETUP) {
+        return (
+            <ActivityStart type={props.type} />
+        );
+    } else {
+        return (
+            <View style={styles.container}>
                 <TouchableOpacity 
                 onPress={DocUrl}
                 style={styles.btnSearchWrapper}
@@ -31,24 +35,8 @@ export default function ActivityAttachement() {
                     </Text>
                 </TouchableOpacity>
             </View>
-            {
-                docState &&
-                <View>
-                    <View style={styles.btnContainer}>
-                        <TouchableOpacity 
-                        onPress={PdfView}
-                        style={styles.btnDisplayWrapper}
-                        >
-                            <Text
-                                style={styles.btn}>
-                                Afficher le justificatif
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            }
-        </View>
-    );
+        );
+    }
 }
 
 const styles = StyleSheet.create({
@@ -56,32 +44,12 @@ const styles = StyleSheet.create({
         color: Colors.white,
     },
 
-    btnContainer: {
-        flexDirection: 'row',
-        marginTop: 20,
-    },
-
-    btnDisplayWrapper: {
-        alignItems: 'center',
-        backgroundColor: Colors.secondary,
-        borderRadius: 10,
-        marginLeft: 5,
-        marginRight: 5,
-        padding: 15,
-        shadowColor: Colors.shadowColor,
-		shadowOffset: {
-			width: 0,
-			height: 1,
-		},
-		shadowOpacity: 0.22,
-		shadowRadius: 2.22,
-    },
-
     btnSearchWrapper: {
         backgroundColor: Colors.primary,
         borderRadius: 10,
         marginLeft: 5,
         marginRight: 5,
+        marginTop: 50,
         padding: 15,
         shadowColor: Colors.shadowColor,
 		shadowOffset: {

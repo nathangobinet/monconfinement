@@ -20,7 +20,7 @@ export default [
         titre : "Autres",
         desc : "Travail, Rendez-vous et autres sorties diverses.",
         infoSupp : "Pièce justificative obligatoire.",
-        need : "Pièce justificative.",
+        need : "Renseignez une pièce justificative pour pouvoir démarrer l'activité.",
         img : ActivityImages["Autre"],
         type: 3,
     }
