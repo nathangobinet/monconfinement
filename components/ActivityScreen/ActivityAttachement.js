@@ -2,16 +2,20 @@ import React, {useState} from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import Colors from '../../constants/Colors';
 import * as DocumentPicker from 'expo-document-picker';
+//import Pdf from 'react-native-pdf';
 
 export default function ActivityAttachement() {
     const [docState, setDocState] = useState(false);
 
     async function DocUrl() {
-        const doc = await DocumentPicker.getDocumentAsync({});
+        const doc = await DocumentPicker.getDocumentAsync({"type": "application/pdf"});
         if (doc.type === "success") {
-            setDocState(true);
-            console.log(doc);
+            setDocState(doc);
         }
+    }
+
+    function PdfView() {
+        console.log(docState.uri);
     }
     
     return (
@@ -29,16 +33,18 @@ export default function ActivityAttachement() {
             </View>
             {
                 docState &&
-                <View style={styles.btnContainer}>
-                    <TouchableOpacity 
-                    onPress={DocUrl}
-                    style={styles.btnDisplayWrapper}
-                    >
-                        <Text
-                            style={styles.btn}>
-                            Afficher le justificatif
-                        </Text>
-                    </TouchableOpacity>
+                <View>
+                    <View style={styles.btnContainer}>
+                        <TouchableOpacity 
+                        onPress={PdfView}
+                        style={styles.btnDisplayWrapper}
+                        >
+                            <Text
+                                style={styles.btn}>
+                                Afficher le justificatif
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             }
         </View>
@@ -93,4 +99,5 @@ const styles = StyleSheet.create({
         marginLeft: 100,
         marginRight: 100,
     },
+
 });

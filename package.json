@@ -21,6 +21,7 @@
     "expo-asset": "~8.1.0",
     "expo-cli": "^3.20.3",
     "expo-constants": "~9.0.0",
+    "expo-document-picker": "~8.1.0",
     "expo-font": "~8.1.0",
     "expo-linking": "^1.0.1",
     "expo-permissions": "^8.1.0",
@@ -36,8 +37,7 @@
     "react-native-safe-area-context": "0.7.3",
     "react-native-screens": "~2.2.0",
     "react-native-svg": "^11.0.1",
-    "react-native-web": "~0.11.7",
-    "expo-document-picker": "~8.1.0"
+    "react-native-web": "~0.11.7"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
