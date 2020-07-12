@@ -16,25 +16,21 @@ export default function ActivityAttachement(props) {
         }
     }
     
-    if(docState && Activity.getState() === states.SETUP) {
-        return (
-            <ActivityStart type={props.type} />
-        );
-    } else {
-        return (
-            <View style={styles.container}>
-                <TouchableOpacity 
-                onPress={DocUrl}
-                style={styles.btnSearchWrapper}
-                >
-                    <Text
-                        style={styles.btn}>
-                        Selectionner un justificatif
-                    </Text>
-                </TouchableOpacity>
-            </View>
-        );
-    }
+    return (
+        <View style={styles.container}>
+            <TouchableOpacity 
+            onPress={DocUrl}
+            style={styles.btnSearchWrapper}
+            >
+                <Text
+                    style={styles.btn}>
+                    Selectionner un justificatif
+                </Text>
+            </TouchableOpacity>
+            <ActivityStart type={props.type} ready={docState !== false} />
+        </View>
+    );
+    
 }
 
 const styles = StyleSheet.create({
