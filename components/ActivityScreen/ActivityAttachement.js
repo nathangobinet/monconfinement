@@ -5,8 +5,6 @@ import Activity, { states } from '../../hooks/Activity'
 import ActivityStart from './ActivityStart';
 import * as DocumentPicker from 'expo-document-picker';
 
-alert(Activity.getState() + " " + states.SETUP)
-
 export default function ActivityAttachement(props) {
     const [docState, setDocState] = useState(false);
 
