@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Alert } from 'react-native';
 import Colors from '../../constants/Colors';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -69,9 +69,11 @@ function Timer({ type }) {
   } else {
     return (
       <CountdownCircleTimer
+          style={styles.timer}
           isPlaying='true'
           duration={durationInSeconds}
           initialRemainingTime={remainingSeconds}
+          onComplete={() => { Alert.alert('Attention', 'La durée de votre entrainement dépasse une heure. Merci de regagner votre zone de confinement'); }}
           colors={[[Colors.primary]]}
       >
           {
@@ -101,6 +103,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginLeft: 100,
     marginRight: 100,
+    marginTop: 50,
   },
 
   countdownWrapper: {
@@ -118,7 +121,6 @@ const styles = StyleSheet.create({
     color: Colors.primary,
     fontSize: 32,
   },
-
   startBtnWrapper: {
     alignItems: 'center',
     backgroundColor: Colors.primary,
@@ -127,7 +129,6 @@ const styles = StyleSheet.create({
     height: 160,
     justifyContent: 'center',
     marginBottom: 50,
-    marginTop: 50,
     shadowColor: Colors.shadowColor,
 		shadowOffset: {
 			width: 0,
@@ -137,12 +138,10 @@ const styles = StyleSheet.create({
 		shadowRadius: 2.22,
     width: 160,
   },
-
   startLbl: {
     color: Colors.white,
     fontSize: 30,
   },
-
   waitingLbl: {
     color: Colors.white,
     fontSize: 22,
