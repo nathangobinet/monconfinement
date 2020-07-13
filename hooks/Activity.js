@@ -104,7 +104,7 @@ class Activity {
 
   start() {
     this.decreaseCount();
-    alertAndNotifiate('L\'activité a commencée !', 'L\'activité a commencée');
+    alertAndNotifiate('L\'activité a commencé !', 'L\'activité a commencé');
     this._timestamp = Date.now();
     this.setState(states.STARTED);
   }
