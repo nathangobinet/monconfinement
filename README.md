@@ -6,8 +6,6 @@
   <br>
 </h1>
 
-___
-
 <h4 align="center">Une application Android/IOS permettant de simplifier votre confinement.</h4>
 
 <p align="center">
