@@ -7,7 +7,7 @@
 </h1>
 
 <h4 align="center">Une application Android/IOS permettant de simplifier votre confinement.</h4>
-
+<br>
 <p align="center">
   <img src="https://raw.githubusercontent.com/nathangobinet/monconfinement/master/docs/images/front.png" alt="Mon confinement" width="1000"></a>
 </p>
