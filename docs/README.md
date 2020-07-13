@@ -3,11 +3,15 @@
   <br>
   <a href="https://github.com/nathangobinet/monconfinement"><img src="https://raw.githubusercontent.com/nathangobinet/monconfinement/master/docs/images/logo.png" alt="Mon confinement" width="200"></a>
   <br>
-  Mon confinement
+  Mon Confinement
   <br>
 </h1>
 
+___
+
 <h4 align="center">Une application Android/IOS permettant de simplifier votre confinement.</h4>
+
+![screenshot](https://raw.githubusercontent.com/nathangobinet/monconfinement/master/docs/images/front.png)
 
 # Mon Confinement 🏠
 > 📱 Une application Android/IOS permettant de simplifier votre confinement. 📱
