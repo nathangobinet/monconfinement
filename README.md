@@ -1,12 +1,12 @@
 <h1 align="center">
   <br>
-  <a href="https://github.com/nathangobinet/monconfinement"><img src="https://raw.githubusercontent.com/nathangobinet/monconfinement/master/docs/images/logo.png" alt="Mon confinement" width="200"></a>
+  <a href="https://nathangobinet.github.io/monconfinement"><img src="https://raw.githubusercontent.com/nathangobinet/monconfinement/master/docs/images/logo.png" alt="Mon confinement" width="200"></a>
   <br>
   Mon Confinement
   <br>
 </h1>
 
-<h4 align="center">Une application Android/IOS permettant de simplifier votre confinement.</h4>
+<h4 align="center">Une application Android/IOS permettant de simplifier votre confinement - <a href="https://nathangobinet.github.io/monconfinement">Documentation</h4>
 <br>
 <p align="center">
   <img src="https://raw.githubusercontent.com/nathangobinet/monconfinement/master/docs/images/front.png" alt="Mon confinement" width="1000"></a>
