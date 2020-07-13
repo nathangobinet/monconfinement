@@ -14,7 +14,7 @@ ___
   <img src="https://raw.githubusercontent.com/nathangobinet/monconfinement/master/docs/images/front.png" alt="Mon confinement" width="1000"></a>
 </p>
 
-## ✨ Fonctionalités clés 
+## ✨ Fonctionalités
 
 Mon Confinement vous permet de controlelr efficacement vos sorties et activités exterieures !
 Elle vous permet de renseigner sur vos autorisations de sorties, d'éviter de déborder sur la durée et la distance d'un entrainement sportif, de connaître les magasins éligibles à une sortie, et d'enregistrer vos pièces justificatives en fonction de votra activité (travail, rendez-vous médicaux,...).
