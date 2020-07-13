@@ -1,8 +1,4 @@
- <br/>
-
 * [🎉 Accueil](/)
-
-<br/>
 
 * 📚 Rapport du projet
   * [📃 Présentation](presentation.md)

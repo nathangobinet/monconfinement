@@ -26,20 +26,20 @@ Intégration d’un panel d'administration permettant de modifier les règles du
 ### 1. Système de paramètre
 Le système de paramètre permet à l'utilisateur de renseigner ses données personnelles (nom, prénom, localisation de confinement). La localisation de confinement peut être indiquée à l’aide de l’adresse du domicile ou grâce à la géolocalisation du téléphone. La saisie des données personnelles est demandée lors de la première connexion de l’utilisateur.
 <p align="center">
-  <img src="../images/usecase1.png" alt="Système de paramètre" width="600">
+  <img src="https://raw.githubusercontent.com/nathangobinet/monconfinement/master/docs/images/usecase1.png" alt="Système de paramètre" width="600">
 </p>
 
 ### 2. Recevoir des notifications
 L’utilisateur reçoit une notification si il sort de son lieu de confinement sans avoir démarré une activité légale au préalable. La notification lui demande de retourner dans son lieu de confinement ou de commencer une activité légale.
 <p align="center">
-  <img src="../images/usecase2.png" alt="Recevoir des notifications" width="600">
+  <img src="https://raw.githubusercontent.com/nathangobinet/monconfinement/master/docs/images/usecase2.png" alt="Recevoir des notifications" width="600">
 </p>
 
 
 ### 3. Ecran d'accueil de Mon Confinement
 L’écran d’accueil de l’application présente la liste des activités légales. Il est possible de cliquer sur chacune des activités, de fournir les justificatifs si nécessaire, puis de commencer l’activité. Le lancement d’une activité est autorisée uniquement si le nombre d’activité déjà réalisé dans la journée est inférieur au nombre d’activités autorisées.
 <p align="center">
-  <img src="../images/usecase3.png" alt="Ecran d'accueil de Mon Confinement" width="600">
+  <img src="https://raw.githubusercontent.com/nathangobinet/monconfinement/master/docs/images/usecase3.png" alt="Ecran d'accueil de Mon Confinement" width="600">
 </p>
 
 
@@ -50,7 +50,7 @@ Nous pouvons voir : un écran principal représentant le menu de Mon Confinement
 
 Au final, nous verrons que le design de l’application mobile est resté fidèle aux Mockups.
 <p align="center">
-  <img src="../images/mockups.png" alt="Mockups" width="700">
+  <img src="https://raw.githubusercontent.com/nathangobinet/monconfinement/master/docs/images/mockups.png" alt="Mockups" width="700">
 </p>
 
 

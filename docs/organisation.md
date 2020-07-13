@@ -48,7 +48,7 @@ Les tâches ont étés répartis selon les préférences de chacun:
 Un diagramme de Gantt a été utilisé pour organiser le projet.
 
 <p align="center">
-  <img src="../images/gantt.png" alt="Diagramme de GANTT" width="600">
+  <img src="https://raw.githubusercontent.com/nathangobinet/monconfinement/master/docs/images/gantt.png" alt="Diagramme de GANTT" width="600">
 </p>
 
 Pour plus de détail: [Diagramme de Gantt]( https://docs.google.com/spreadsheets/d/1evV2R48NgN1K_fsC_L4g1UgpSIlwx96pFxPiy80CLOY/edit?usp=sharing)
@@ -56,11 +56,11 @@ Pour plus de détail: [Diagramme de Gantt]( https://docs.google.com/spreadsheets
 ## Gestion de projet avec GitHub
 Git est un logiciel de gestion de version décentralisé. Il permet de travailler à plusieurs sur un projet informatique. Nous avons utilisé le service Web GitHub. Il intègre, en plus du versionning, la gestion des issues qui nous a permis de lister toutes les tâches et de les assigner à chacun des membres du projet.
 <p align="center">
-  <img src="../images/issues.png" alt="Issues Github" width="600">
+  <img src="https://raw.githubusercontent.com/nathangobinet/monconfinement/master/docs/images/issues.png" alt="Issues Github" width="600">
 </p>
 Nous n’avons pas désigné de chef de projet mais nous avons appliqué une gestion de projet avec GIT et ses Issues. Le début du projet a été marqué par un Brainstorming des issues à créer.
 <p align="center">
-  <img src="../images/commits.png" alt="Commits Github" width="600">
+  <img src="https://raw.githubusercontent.com/nathangobinet/monconfinement/master/docs/images/commits.png" alt="Commits Github" width="600">
 </p>
 Le développement du projet a commencé le 10 mai. La majeur partie des fonctionnalités ont été développées. GitHub nous permet d’afficher les statistiques de commit sur la période de développement de l’application.
  
