@@ -7,7 +7,7 @@ Les instructions d'installation sont disponnibles à l'[Accueil](/?id=💻-insta
 
 Au premier démarrage, l’application vous demandera de renseigner votre nom, votre prénom et votre adresse. Le renseignement de l’adresse se fait automatiquement avec le bouton `Me localiser`. Une zone de confinement sera aussi automatiquement établie à votre position. Bien évidemment, ces informations seront modifiables en cliquant sur le bouton `Paramètres`.
 
-Il faut savoir que les informations inscrites dans ce formulaire sont **uniquement enregistrées localement dans votre téléphone** car Mon Confinement se base sur un principe de responsabilité collective envers ces utilisateurs.
+Il faut savoir que les informations inscrites dans ce formulaire sont **uniquement enregistrées localement dans votre téléphone** car Mon Confinement se base sur un principe de responsabilité collective envers ses utilisateurs.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/nathangobinet/monconfinement/master/docs/images/bienvenue.PNG" alt="Écran d'accueil" width="550">
