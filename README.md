@@ -14,8 +14,8 @@
 
 ## ✨ Fonctionalités
 
-Mon Confinement vous permet de contrôler efficacement vos sorties et activités exterieures !
-Elle vous permet de renseigner sur vos autorisations de sorties, d'éviter de déborder sur la durée et la distance d'un entrainement sportif, de connaître les magasins éligibles à une sortie, et d'enregistrer vos pièces justificatives en fonction de votra activité (travail, rendez-vous médicaux,...).
+L'application **Mon Confinement** vous permet de controller efficacement vos sorties et activités exterieures !
+Elle vous permet d'éviter de déborder sur la durée et la distance d'un entrainement sportif, de connaître les magasins éligibles à une sortie, et d'enregistrer vos pièces justificatives en fonction de votre activité (travail, rendez-vous médicaux,...).
 
 ## 💡 Prérequis 
 Afin d'installer et essayer Mon Confinement, [node.js](https://www.nodejs.org/) doit être installé dans votre système.
