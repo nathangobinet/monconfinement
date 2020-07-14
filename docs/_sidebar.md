@@ -6,3 +6,6 @@
   * [📱 Choix technologique](techno.md)
   * [🔨 Réalisation](realisation.md)
   * [✔️ Bilan](bilan.md)
+
+* [📙 Manuel utilisateur](manual.md)
+
