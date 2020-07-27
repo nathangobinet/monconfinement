@@ -37,7 +37,7 @@ cd monconfinement
 ```bash
 npm install
 ```
-4. __Lancez__ le projet :
+5. __Lancez__ le projet :
 ```bash
 expo start
 ```
